@@ -55,7 +55,7 @@ vmaterialresult: async function(req, res){
         
         mtlcategory:{contains:qmtlCatrgory},
         mtlname:{contains:qmtlname},
-        quantity:{contains:qmtlquantity},
+        mtlquantity:{contains:qmtlquantity},
 
         }
         
