@@ -25,7 +25,7 @@ materialresult: async function(req, res){
     const qmtlname = req.query.mtlname;
     const qmtlquantity = req.query.mtlquantity;
     
-    var models = await Book.find({
+    var models = await Material.find({
         where:{
         
         mtlcategory:{contains:qmtlCatrgory},
