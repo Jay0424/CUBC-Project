@@ -115,6 +115,19 @@ module.exports.bootstrap = async function () {
 
   ])
 
+  if(Material.count>0)
+  {
+    return;
+  }
+
+  await Material.createEach([
+      {mltname:"原子筆", mtlquantity:"10", mtlcategory:"文具", mtllocation:"C架11行",  photo:"https://s.yimg.com/zp/MerchandiseImages/801A1EA020-SP-7138139.jpg"},
+
+      {mlttname:"IPAD", mtlquantity:"1", mtlcategory:"電子產品",mtllocation:"C架11行",
+      photo:"https://buy4u.hk/image/catalog/product%20gallery/gadget/apple/ipad%20mini%202019/ipad_mini_2019_2.jpg"},
+
+
+  ])
 
 
 
