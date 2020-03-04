@@ -52,6 +52,13 @@ module.exports.routes = {
   '   /gift/vgiftsearch': 'GiftController.vgiftsearch',
   'GET /gift/vgiftresult': 'GiftController.vgiftresult',
 
+  // material user
+  '   /material/materialsearch': 'MaterialController.materialsearch',
+  'GET /material/mamterialresult': 'MaterialController.materialresult',
+  //Material vistor
+  '   /material/vmaterialsearch': 'MaterialController.vmaterialsearch',
+  'GET /material/vmaterialresult': 'MaterialController.vmaterialresult',
+
 
   
 

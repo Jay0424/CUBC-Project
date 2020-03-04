@@ -30,25 +30,25 @@
             <% event.forEach(function(model) { %>
             <div class="card col-xl-6 col-sm-12">
                 <div id="title">
-                    <a href="/"><%=model.name%> </a>
+                    <a href="/"><%=model.mtlname%> </a>
                 </div>
                 <p></p>
                 <div id="info">
-                    <img src=<%=model.photo %> id="photo" width="150" height="150">
+                    <img src=<%=model.mtlphoto %> id="photo" width="150" height="150">
                     <ul class="list-group">
                         <li class="list-group-item" id="info">
                             <span id="briefinfo">物資名稱:</span>
-                            <%= model.eventname %>
+                            <%= model.mtlname%>
                         </li>
 
                         <li class="list-group-item" id="info">
-                            <span id="briefinfo">物資類別</span>
-                            <%= model.category %>
+                            <span id="briefinfo">物資類別:</span>
+                            <%= model.mtlcategory %>
                         </li>
 
                         <li class="list-group-item" id="info">
-                            <span id="briefinfo">數量</span>
-                            <%= model.publisher %>
+                            <span id="briefinfo">數量:</span>
+                            <%= model.mtlquantity %>
                         </li>
 <!-- 
                         <li class="list-group-item" id="info">
