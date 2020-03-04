@@ -14,6 +14,8 @@
                     <a class="nav-item nav-link active" href="/apartment/admin">帳戶</a>
                 </div>
             </div>
+            
+
             <div>
                 尚未登入 如需登入請按主頁
             </div>
@@ -26,13 +28,39 @@
             </div>
         </div>
 
-        <div>
-            <a class="nav-item nav-link active" href="/book/vbooksearch">搜尋書本</a>
-            <a class="nav-item nav-link active" href="/game/vgamesearch">搜尋桌遊</a>
-            <a class="nav-item nav-link active" href="/gift/vgiftsearch">搜尋禮物</a>
-            <a class="nav-item nav-link active" href="/material/vmaterial">搜尋活動物資</a>
+        <div class="row">
+            <% material.forEach(function(model) { %>
+            <div class="card col-xl-6 col-sm-12">
+                <div id="title">
+                    <a href="/"><%=model.mtlname%> </a>
+                </div>
+                <p></p>
+                <div id="info">
+                    <img src=<%=model.photo %> id="photo" width="150" height="150">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="info">
+                            <span id="briefinfo">名稱:</span>
+                            <%= model.mtlname %>
+                        </li>
+
+                        <li class="list-group-item" id="info">
+                            <span id="briefinfo">類別:</span>
+                            <%= model.mtlcategory %>
+                        </li>
+
+                        <li class="list-group-item" id="info">
+                            <span id="briefinfo">數量:</span>
+                            <%= model.mtlquantity %>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <p></p>
+
+            </div>
+            <% }); %>
+
         </div>
-
     </div>
-
 </body>

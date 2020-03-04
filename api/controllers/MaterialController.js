@@ -7,22 +7,21 @@
 
 module.exports = {
   
+// // json function
+//     json: async function (req, res) {
 
-    // json function
-json: async function (req, res) {
+//     var materials = await materials.find();
 
-    var materials = await materials.find();
-
-    return res.json(materials);
-},
-
-// action - index
-// index: async function (req, res) {
-
-//     var models = await Material.find();
-//     return res.view('material/index', { materials: models });
-    
+//     return res.json(materials);
 // },
+
+
+    vmaterialsearch: async function (req, res) {
+
+    var models = await Material.find();
+    return res.view('material/vmaterialsearch', { materials: models });
+    
+},
 
 
 
