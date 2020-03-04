@@ -52,10 +52,10 @@
         </form>
 
         <div class="row">
-            <% gift.forEach(function(model) { %>
+            <% material.forEach(function(model) { %>
             <div class="card col-xl-6 col-sm-12">
                 <div id="title">
-                    <a href="/"><%=model.name%> </a>
+                    <a href="/"><%=model.mtlname%> </a>
                 </div>
                 <p></p>
                 <div id="info">
@@ -63,17 +63,17 @@
                     <ul class="list-group">
                         <li class="list-group-item" id="info">
                             <span id="briefinfo">名稱:</span>
-                            <%= model.giftname %>
+                            <%= model.mtlname %>
                         </li>
 
                         <li class="list-group-item" id="info">
                             <span id="briefinfo">類別:</span>
-                            <%= model.category %>
+                            <%= model.mtlcategory %>
                         </li>
 
                         <li class="list-group-item" id="info">
                             <span id="briefinfo">數量:</span>
-                            <%= model.amount %>
+                            <%= model.mtlamount %>
                         </li>
 
                     </ul>
