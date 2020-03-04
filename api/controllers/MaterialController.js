@@ -28,9 +28,9 @@ materialresult: async function(req, res){
     var models = await Book.find({
         where:{
         
-        mtlcategory:{contains:qCatrgory},
-        mtlname:{contains:qBookname},
-        mtlquantity:{contains:qAuthor},
+        mtlcategory:{contains:qmtlCatrgory},
+        mtlname:{contains:qmtlname},
+        mtlquantity:{contains:qmtlquantity},
         }
         
     }).sort([{id:'DESC'}]);
@@ -50,7 +50,7 @@ vmaterialresult: async function(req, res){
     const qmtlquantity = req.query.mtlquantity;
 
 
-    var models = await material.find({
+    var models = await Material.find({
         where:{
         
         mtlcategory:{contains:qmtlCatrgory},
@@ -61,7 +61,7 @@ vmaterialresult: async function(req, res){
         
     }).sort([{id:'DESC'}]);
 
-    return res.view('book/vbookresult', {material:models});
+    return res.view('material/vmaterialresult', {material:models});
 
 },
 
