@@ -15,6 +15,7 @@
                 </div>
             </div>
             
+
             <!-- <div><%=req.session.username%></div> -->
             <div>登入者: <%=req.session.username%> <a href="/user/logout">登出</a></div>
         </nav>
@@ -25,13 +26,44 @@
             </div>
         </div>
 
-        <div>
-            <a class="nav-item nav-link active" href="/book/booksearch">搜尋書本</a>
-            <a class="nav-item nav-link active" href="/game/gamesearch">搜尋桌遊</a>
-            <a class="nav-item nav-link active" href="/gift/giftsearch">搜尋禮物</a>
-            <a class="nav-item nav-link active" href="/event/eventsearch">搜尋活動物資</a>
+        <div class="row">
+            <% event.forEach(function(model) { %>
+            <div class="card col-xl-6 col-sm-12">
+                <div id="title">
+                    <a href="/"><%=model.name%> </a>
+                </div>
+                <p></p>
+                <div id="info">
+                    <img src=<%=model.photo %> id="photo" width="150" height="150">
+                    <ul class="list-group">
+                        <li class="list-group-item" id="info">
+                            <span id="briefinfo">物資名稱:</span>
+                            <%= model.eventname %>
+                        </li>
+
+                        <li class="list-group-item" id="info">
+                            <span id="briefinfo">物資類別</span>
+                            <%= model.category %>
+                        </li>
+
+                        <li class="list-group-item" id="info">
+                            <span id="briefinfo">數量</span>
+                            <%= model.publisher %>
+                        </li>
+<!-- 
+                        <li class="list-group-item" id="info">
+                            <span id="briefinfo">存放位置</span>
+                            <%= model.publisher %>
+                        </li> -->
+ 
+                    </ul>
+                </div>
+
+                <p></p>
+
+            </div>
+            <% }); %>
+
         </div>
-
     </div>
-
 </body>
