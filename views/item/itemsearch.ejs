@@ -2,8 +2,7 @@
     <div class="container">
         <nav role="navigation" class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/">主頁</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -14,9 +13,10 @@
                     <a class="nav-item nav-link active" href="/apartment/admin">帳戶</a>
                 </div>
             </div>
-            
+
             <!-- <div><%=req.session.username%></div> -->
-            <div>登入者: <%=req.session.username%> <a href="/user/logout">登出</a></div>
+            <div>登入者:
+                <%=req.session.username%> <a href="/user/logout">登出</a></div>
         </nav>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
@@ -30,6 +30,8 @@
             <a class="nav-item nav-link active" href="/game/gamesearch">搜尋桌遊</a>
             <a class="nav-item nav-link active" href="/gift/giftsearch">搜尋禮物</a>
             <a class="nav-item nav-link active" href="/material/materialsearch">搜尋活動物資</a>
+
+
         </div>
 
     </div>
