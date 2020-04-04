@@ -1,0 +1,71 @@
+<body onload="pageLoaded()">
+    <div class="container">
+        <br>
+
+        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center">
+
+        <br>
+        <br>
+        <h2 style="color: wheat; background-color: darkred;" class="center">用戶資料</h2>
+        <div style="position: relative;" class="mycard col-12 col-xl-12">
+            <label style="position: relative;bottom: -5px;">用戶名稱: <%=model.username%></label>
+            <br>
+            <label style="position: relative;bottom: -5px;">電郵: <%=model.email%></label>
+            <br>
+            <label style="position: relative;bottom: -5px;">部門: <%=model.department%></label>
+            <br>
+            <label style="position: relative;bottom: -5px;">職位: <%=model.position%></label>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div>
+            <form action="/user/logout" method="POST">
+                <button type="submit" class="btn btn-primary center">登出</a>
+            </form>
+        </div>
+
+        <br>
+        <form action="/item/userpasswordupdate">
+            <button type="submit" class="btn btn-secondary center">更改密碼</button>
+        </form>
+        <br>
+        <form action="/item/useraccountupdate">
+            <button type="submit" class="btn btn-secondary center">更改資料</button>
+        </form>
+        <br>
+
+
+
+
+
+        <nav class="bottomnav fixed-bottom">
+            <a href="/item/userindex" class="nav__link">
+                <i class="material-icons">
+                    home
+                </i>
+                <span class="nav__text">主頁</span>
+            </a>
+            <a href="/item/usersearch" class="nav__link nav__link--active">
+                <i class="material-icons">
+                    search
+                </i>
+                <span class="nav__text">搜尋</span>
+            </a>
+            <a href="/item/usernoti" class="nav__link">
+                <i class="material-icons">
+                    email
+                </i>
+                <span class="nav__text">通知</span>
+            </a>
+            <a href="/item/useraccount" class="nav__link">
+                <i class="material-icons">
+                    account_circle
+                </i>
+                <span class="nav__text">帳戶</span>
+            </a>
+        </nav>
+
+
+    </div>
+</body>

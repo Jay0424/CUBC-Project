@@ -15,11 +15,16 @@ module.exports = {
 
         var user = await User.findOne({ username: req.body.username });
 
-        if (!user) return res.status(401).send("User not found");
+        if(!user) return res.redirect("/item/noaccount");
+
+        //if (!user) return res.status(401).send("User not found");
 
         const match = await sails.bcrypt.compare(req.body.password, user.password);
 
-        if (!match) return res.status(401).send("Wrong Password");
+        //if (!match) return res.status(401).send("Wrong Password");
+        
+        if(!match) return res.redirect("/item/wrongpassword");
+
 
         req.session.regenerate(function (err) {
 
@@ -29,13 +34,22 @@ module.exports = {
 
             req.session.userid = user.id;
 
+            req.session.userrole= user.role;
+
             sails.log("[Session] ", req.session);
 
             // return res.ok("Login successfully.");
 
-            
-             return res.redirect("/item/userindex");
-           
+
+            if (req.session.userrole == "admin") {
+                return res.redirect("/item/adminindex");
+            }
+            else if(req.session.userrole=="user"){
+                return res.redirect("/item/userindex");
+            }
+
+
+
 
             // else if (user.role == "admin") {
             //     return res.redirect("/item/homepage");
@@ -59,7 +73,9 @@ module.exports = {
 
         });
     },
-  
+
+    
+
 
 };
 

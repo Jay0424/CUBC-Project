@@ -1,47 +1,62 @@
 <body onload="pageLoaded()">
     <div class="container">
-        <nav role="navigation" class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">主頁</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/item/vitemsearch/">搜尋 <span
-                            class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link active" href="/apartment/create">通知</a>
-                    <a class="nav-item nav-link active" href="/apartment/admin">帳戶</a>
-                </div>
-            </div>
-            
+        <br>
+        <br>
+        <br>
 
-            <!-- <div><%=req.session.username%></div> -->
-        </nav>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">基督教協基會社會服務部存貨系統</h1>
-                <p class="lead">此存貨系統可用於借還書籍/桌遊/活動物資/禮物(不用歸還)</p>
-            </div>
-        </div>
+
+        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center">
+
+        <br>
+
+        <lottie-player class="center" src="https://assets3.lottiefiles.com/packages/lf20_KO70yq.json" background="transparent" speed="1" style="width: 300px" loop autoplay>
+        </lottie-player>
+
 
         <form action="/user/login" method="POST">
 
             <div class="form-group">
                 <label for="exampleInputEmail1">用戶名稱</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="輸入用戶名稱" name="username">
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="輸入用戶名稱" name="username">
             </div>
 
             <div class="form-group">
                 <label for="exampleInputPassword1">密碼</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="輸入密碼"
-                    name="password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="輸入密碼" name="password">
             </div>
 
-            <button type="submit" class="btn btn-primary">登入</button>
+            <button type="submit" class="btn btn-primary center">登入</button>
         </form>
+
+        <nav class="bottomnav fixed-bottom">
+            <a href="/" class="nav__link">
+                <i class="material-icons">
+                        home
+                    </i>
+                <span class="nav__text">主頁</span>
+            </a>
+            <a href="/item/vistorsearch" class="nav__link nav__link--active">
+                <i class="material-icons">
+                        search
+                    </i>
+                <span class="nav__text">搜尋</span>
+            </a>
+            <a href="/item/vistornotlogin" class="nav__link">
+                <i class="material-icons">
+                        email
+                    </i>
+                <span class="nav__text">通知</span>
+            </a>
+            <a href="/item/vistornotlogin" class="nav__link">
+                <i class="material-icons">
+                        account_circle
+                    </i>
+                <span class="nav__text">帳戶</span>
+            </a>
+        </nav>
 
     </div>
 
 </body>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>

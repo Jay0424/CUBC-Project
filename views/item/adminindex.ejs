@@ -1,0 +1,180 @@
+<body onload="pageLoaded()">
+    <div class="container">
+        <br>
+
+        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center">
+
+        <br>
+
+        <form action="/item/adminadditem">
+            <button type="submit" class="btn btn-success center">增加物品</button>
+        </form>
+
+        <br>
+
+        <form action="/item/adminedititem">
+            <button type="submit" class="btn btn-danger center">修改物品資料/刪除物品</button>
+        </form>
+
+        <br>
+
+        <button type="submit" class="btn btn-warning center">增加通知</button>
+
+        <br>
+
+        <div>
+            <div class="container">
+                <h2 style="color:wheat; background-color: darkred;"> &nbsp;&nbsp;待通知</h2>
+                <div class="square center" style="background-color:lightgoldenrodyellow">
+                    <div class="row">
+                        <div class="col center">
+                            種類
+                        </div>
+                        <div class="col center">
+                            名稱
+                        </div>
+                        <div class="col center ">
+                            備注
+                        </div>
+                    </div>
+                </div>
+                <div class="square center">
+                    <div class="row">
+                        <div class="col center">
+                            書籍
+                        </div>
+                        <div class="col center">
+                            曼巴精神
+                        </div>
+                        <div class="col center ">
+                            遺失
+                        </div>
+                    </div>
+                </div>
+                <div class="square center">
+                    <div class="row">
+                        <div class="col center">
+                            桌遊
+                        </div>
+                        <div class="col center">
+                            卡坦島
+                        </div>
+                        <div class="col center " style="color: black;">
+                            已損壞
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="square center">
+                    <div class="row">
+                        <div class="col center">
+                            物資
+                        </div>
+                        <div class="col center">
+                            IPAD
+                        </div>
+                        <div class="col center ">
+                            數量不足
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+        <div>
+            <div class="container">
+                <h2 style="color:wheat; background-color: darkred;"> &nbsp;&nbsp;已處理</h2>
+                <div class="square center" style="background-color:lightgoldenrodyellow">
+                    <div class="row">
+                        <div class="col center">
+                            種類
+                        </div>
+                        <div class="col center">
+                            名稱
+                        </div>
+                        <div class="col center ">
+                            處理狀況
+                        </div>
+                    </div>
+                </div>
+                <div class="square center">
+                    <div class="row">
+                        <div class="col center">
+                            物資
+                        </div>
+                        <div class="col center">
+                            氣球
+                        </div>
+                        <div class="col center ">
+                            已添加
+                        </div>
+                    </div>
+                </div>
+                <div class="square center">
+                    <div class="row">
+                        <div class="col center">
+                            桌遊
+                        </div>
+                        <div class="col center">
+                            矮人礦坑
+                        </div>
+
+                        <div class="col center " style="color:red">
+                            暫時拒絕
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="square center">
+                    <div class="row">
+                        <div class="col center">
+                            物資
+                        </div>
+                        <div class="col center">
+                            原子筆
+                        </div>
+                        <div class="col center ">
+                            已添加
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+        </div>
+        <nav class="bottomnav fixed-bottom">
+            <a href="/item/adminindex" class="nav__link">
+                <i class="material-icons">
+                    home
+                </i>
+                <span class="nav__text">主頁</span>
+            </a>
+            <a href="/item/adminsearch" class="nav__link nav__link--active">
+                <i class="material-icons">
+                    search
+                </i>
+                <span class="nav__text">搜尋</span>
+            </a>
+            <a href="/item/adminnoti" class="nav__link">
+                <i class="material-icons">
+                    email
+                </i>
+                <span class="nav__text">通知</span>
+            </a>
+            <a href="/item/adminaccount" class="nav__link">
+                <i class="material-icons">
+                    account_circle
+                </i>
+                <span class="nav__text">帳戶</span>
+            </a>
+        </nav>
+    </div>
+
+
+</body>

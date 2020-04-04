@@ -22,25 +22,58 @@ module.exports.policies = {
   ItemController:
   {
     userindex:"isUser",
-    itemsearch:"isUser",
+    usersearch:"isUser",
+    usernoti:"isUser",
+    useraccount:"isUser",
+    adminindex:"isAdmin",
+    adminsearch:"isAdmin",
+    adminnoti:"isAdmin",
+    adminaccount:"isAdmin",
+    adminadditem:"isAdmin",
+    adminaddbook:"isAdmin",
+    adminaddgame:"isAdmin",
+    adminaddgift:"isAdmin",
+    adminaddmaterial:"isAdmin",
   },
 
   BookController:
   {
-    booksearch:"isUser",
-    bookresult:"isUser",
+    userbooksearch:"isUser",
+    userbookresult:"isUser",
+    userbookdetail:"isUser",
+    adminbooksearch:"isAdmin",
+    adminbookresult:"isAdmin",
+    adminbookdetail:"isAdmin",
   },
 
   GameController:
   {
-    gamesearch:"isUser",
-    gameresult:"isUser",
+    usergamesearch:"isUser",
+    usergameresult:"isUser",
+    usergamedetail:"isUser",
+    admingamesearch:"isAdmin",
+    admingameresult:"isAdmin",
+    admingamedetail:"isAdmin",
   },
 
   GiftController:
   {
-    giftsearch:"isUser",
-    giftresult:"isUser",
+    usergiftsearch:"isUser",
+    usergiftresult:"isUser",
+    usergiftdetail:"isUser",
+    admingiftsearch:"isAdmin",
+    admingiftresult:"isAdmin",
+    admingiftdetail:"isAdmin",
+  },
+
+  MaterialController:
+  {
+    usermaterialsearch:"isUser",
+    usermaterialresult:"isUser",
+    usermaterialdetail:"isUser",
+    adminmaterialsearch:"isAdmin",
+    adminmaterialresult:"isAdmin",
+    adminmaterialdetail:"isAdmin",
   }
 
 };

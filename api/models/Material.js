@@ -22,32 +22,30 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
-    mtlname:
+    materialname:
     {
       type:"string"
     },
 
-    mtlcategory:
+    category:
     {
       type:"string"
     },
 
-    mtllocation:
+    location:
     {
       type:"string"
     },
 
-    mtlphoto:
+    photo:
     {
       type:"string"
     },
 
-    mtlquantity:
+    amount:
     {
       type:"number"
     },
-
 
   },
 

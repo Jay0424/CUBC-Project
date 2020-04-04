@@ -7,12 +7,12 @@
 
 module.exports = {
 
-    giftsearch: async function (req, res) {
+    usergiftsearch: async function (req, res) {
         var models = await Gift.find().sort([{ id: 'DESC' }]);
-        return res.view('gift/giftsearch', { gift: models });
+        return res.view('gift/usergiftsearch', { gift: models });
     },
 
-    giftresult: async function (req, res) {
+    usergiftresult: async function (req, res) {
         const qCatrgory = req.query.category || "";
         const qGiftname = req.query.giftname;
         const qAmount = parseInt(req.query.amount);
@@ -69,16 +69,26 @@ module.exports = {
             }).sort([{ id: 'DESC' }]);
         }
 
-        return res.view('gift/giftresult', { gift: models });
+        return res.view('gift/usergiftresult', { gift: models });
 
     },
 
-    vgiftsearch: async function (req, res) {
+    usergiftdetail: async function (req, res) {
+
+        var model = await Gift.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('gift/usergiftdetail', { gift: model });
+
+    },
+
+    admingiftsearch: async function (req, res) {
         var models = await Gift.find().sort([{ id: 'DESC' }]);
-        return res.view('gift/vgiftsearch', { gift: models });
+        return res.view('gift/admingiftsearch', { gift: models });
     },
 
-    vgiftresult: async function (req, res) {
+    admingiftresult: async function (req, res) {
         const qCatrgory = req.query.category || "";
         const qGiftname = req.query.giftname;
         const qAmount = parseInt(req.query.amount);
@@ -135,7 +145,67 @@ module.exports = {
             }).sort([{ id: 'DESC' }]);
         }
 
-        return res.view('gift/vgiftresult', { gift: models });
+        return res.view('gift/admingiftresult', { gift: models });
+
+    },
+
+    admingiftdetail: async function (req, res) {
+
+        var model = await Gift.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('gift/admingiftdetail', { gift: model });
+
+    },
+
+    admingiftedit: async function (req, res) {
+        var models = await Gift.find().sort([{id:'DESC'}]);
+        return res.view('gift/admingiftedit', { gift: models});
+    },
+
+     // action - adminupdate
+     admingiftupdate: async function (req, res) {
+
+        if (req.method == "GET") {
+
+            var model = await Gift.findOne(req.params.id);
+
+            if (!model) return res.notFound();
+
+            return res.view('gift/admingiftupdate', { gift: model });
+
+        } else {
+
+            if (!req.body.Gift)
+                return res.badRequest("Form-data not received.");
+
+            var models = await Gift.update(req.params.id).set({
+                giftname: req.body.Gift.giftname,
+                category: req.body.Gift.category,
+                location: req.body.Gift.location,
+                photo: req.body.Gift.photo,
+                donator: req.body.Gift.donator,
+                value: req.body.Gift.value,
+                amount: req.body.Gift.amount,
+            }).fetch();
+            if (models.length == 0) return res.notFound();
+
+            return res.redirect("/gift/admingiftedit");
+
+        }
+    },
+
+    // action - delete 
+    admingiftdelete: async function (req, res) {
+
+        if (req.method == "GET") return res.forbidden();
+
+        var models = await Gift.destroy(req.params.id).fetch();
+
+        if (models.length == 0) return res.notFound();
+
+        return res.redirect("/gift/admingiftedit");
 
     },
 
