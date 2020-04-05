@@ -7,35 +7,43 @@
 
 module.exports = {
 
-    userbooksearch: async function (req, res) {
-        var models = await Book.find().sort([{id:'DESC'}]);
-        return res.view('book/userbooksearch', { book: models});
+    Bookqrcode: async function(req, res) {
+        return res.view('book/bookqrcode');
     },
 
-    userbookresult: async function(req, res){
-        const qCatrgory=req.query.category || "";
+    bookqrhistory: async function(req, res) {
+        return res.view('book/bookqrhistory');
+    },
+
+    userbooksearch: async function(req, res) {
+        var models = await Book.find().sort([{ id: 'DESC' }]);
+        return res.view('book/userbooksearch', { book: models });
+    },
+
+    userbookresult: async function(req, res) {
+        const qCatrgory = req.query.category || "";
         const qBookname = req.query.bookname;
         const qAuthor = req.query.author;
         const qPublisher = req.query.publisher;
         const qISBN = req.query.ISBN;
 
         var models = await Book.find({
-            where:{
-            
-            category:{contains:qCatrgory},
-            bookname:{contains:qBookname},
-            author:{contains:qAuthor},
-            publisher:{contains:qPublisher},
-            ISBN:{contains:qISBN},
-            }
-            
-        }).sort([{id:'DESC'}]);
+            where: {
 
-        return res.view('book/userbookresult', {book:models});
+                category: { contains: qCatrgory },
+                bookname: { contains: qBookname },
+                author: { contains: qAuthor },
+                publisher: { contains: qPublisher },
+                ISBN: { contains: qISBN },
+            }
+
+        }).sort([{ id: 'DESC' }]);
+
+        return res.view('book/userbookresult', { book: models });
 
     },
 
-    userbookdetail: async function (req, res) {
+    userbookdetail: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -45,35 +53,35 @@ module.exports = {
 
     },
 
-    vistorbooksearch: async function (req, res) {
-        var models = await Book.find().sort([{id:'DESC'}])
-        return res.view('book/vistorbooksearch', { book: models});
+    vistorbooksearch: async function(req, res) {
+        var models = await Book.find().sort([{ id: 'DESC' }])
+        return res.view('book/vistorbooksearch', { book: models });
     },
 
-    vistorbookresult: async function(req, res){
-        const qCatrgory=req.query.category || "";
+    vistorbookresult: async function(req, res) {
+        const qCatrgory = req.query.category || "";
         const qBookname = req.query.bookname;
         const qAuthor = req.query.author;
         const qPublisher = req.query.publisher;
         const qISBN = req.query.ISBN;
 
         var models = await Book.find({
-            where:{
-            
-            category:{contains:qCatrgory},
-            bookname:{contains:qBookname},
-            author:{contains:qAuthor},
-            publisher:{contains:qPublisher},
-            ISBN:{contains:qISBN},
-            }
-            
-        }).sort([{id:'DESC'}]);
+            where: {
 
-        return res.view('book/vistorbookresult', {book:models});
+                category: { contains: qCatrgory },
+                bookname: { contains: qBookname },
+                author: { contains: qAuthor },
+                publisher: { contains: qPublisher },
+                ISBN: { contains: qISBN },
+            }
+
+        }).sort([{ id: 'DESC' }]);
+
+        return res.view('book/vistorbookresult', { book: models });
 
     },
 
-    vistorbookdetail: async function (req, res) {
+    vistorbookdetail: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -83,35 +91,35 @@ module.exports = {
 
     },
 
-    adminbooksearch: async function (req, res) {
-        var models = await Book.find().sort([{id:'DESC'}]);
-        return res.view('book/adminbooksearch', { book: models});
+    adminbooksearch: async function(req, res) {
+        var models = await Book.find().sort([{ id: 'DESC' }]);
+        return res.view('book/adminbooksearch', { book: models });
     },
 
-    adminbookresult: async function(req, res){
-        const qCatrgory=req.query.category || "";
+    adminbookresult: async function(req, res) {
+        const qCatrgory = req.query.category || "";
         const qBookname = req.query.bookname;
         const qAuthor = req.query.author;
         const qPublisher = req.query.publisher;
         const qISBN = req.query.ISBN;
 
         var models = await Book.find({
-            where:{
-            
-            category:{contains:qCatrgory},
-            bookname:{contains:qBookname},
-            author:{contains:qAuthor},
-            publisher:{contains:qPublisher},
-            ISBN:{contains:qISBN},
-            }
-            
-        }).sort([{id:'DESC'}]);
+            where: {
 
-        return res.view('book/adminbookresult', {book:models});
+                category: { contains: qCatrgory },
+                bookname: { contains: qBookname },
+                author: { contains: qAuthor },
+                publisher: { contains: qPublisher },
+                ISBN: { contains: qISBN },
+            }
+
+        }).sort([{ id: 'DESC' }]);
+
+        return res.view('book/adminbookresult', { book: models });
 
     },
 
-    adminbookdetail: async function (req, res) {
+    adminbookdetail: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -121,13 +129,13 @@ module.exports = {
 
     },
 
-    adminbookedit: async function (req, res) {
-        var models = await Book.find().sort([{id:'DESC'}]);
-        return res.view('book/adminbookedit', { book: models});
+    adminbookedit: async function(req, res) {
+        var models = await Book.find().sort([{ id: 'DESC' }]);
+        return res.view('book/adminbookedit', { book: models });
     },
 
-     // action - adminupdate
-     adminbookupdate: async function (req, res) {
+    // action - adminupdate
+    adminbookupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -160,7 +168,7 @@ module.exports = {
     },
 
     // action - delete 
-    adminbookdelete: async function (req, res) {
+    adminbookdelete: async function(req, res) {
 
         if (req.method == "GET") return res.forbidden();
 
@@ -172,8 +180,7 @@ module.exports = {
 
     },
 
-    
-  
+
+
 
 };
-
