@@ -48,7 +48,7 @@ module.exports = {
             }
 
 
-            var sendmail = await sails.helpers.sendSingleEmail({
+            await sails.helpers.sendSingleEmail({
                 to: '17218594@life.hkbu.edu.hk',
                 from: sails.config.custom.mailgunFrom,
                 subject: 'user login',
