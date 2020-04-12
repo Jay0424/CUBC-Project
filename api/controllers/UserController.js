@@ -26,7 +26,7 @@ module.exports = {
         if (!match) return res.redirect("/item/wrongpassword");
 
 
-        req.session.regenerate(function(err) {
+        req.session.regenerate(async function(err) {
 
             if (err) return res.serverError(err);
 
