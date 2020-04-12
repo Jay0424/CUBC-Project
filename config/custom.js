@@ -21,7 +21,7 @@ module.exports.custom = {
     // …
 
     mailgunDomain: 'sandboxc8db4a4765a94f56a2f0eea13400c09c.mailgun.org',
-    mailgunSecret: 'c697b4b07e80c664482dbc3e55a906f3-9dda225e-df2e652b',
+    mailgunSecret: 'pubkey-e57cd39f2fb37f893c17754843694082',
     mailgunFrom: 'cubc3@testingmail.com',
 
 };

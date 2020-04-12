@@ -38,13 +38,6 @@ module.exports = {
 
             sails.log("[Session] ", req.session);
 
-
-            await sails.helpers.sendSingleEmail({
-                to: '17218594@life.hkbu.edu.hk',
-                from: sails.config.custom.mailgunFrom,
-                subject: 'user login',
-                text: req.session.username + ' logged in.'
-            });
             // return res.ok("Login successfully.");
 
 
@@ -55,6 +48,13 @@ module.exports = {
             }
 
 
+
+            await sails.helpers.sendSingleEmail({
+                to: '17218594@life.hkbu.edu.hk',
+                from: sails.config.custom.mailgunFrom,
+                subject: 'user login',
+                text: 'logged in.'
+            });
 
 
             // else if (user.role == "admin") {
