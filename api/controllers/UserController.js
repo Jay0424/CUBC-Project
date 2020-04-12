@@ -7,7 +7,7 @@
 
 module.exports = {
 
-    login: async function (req, res) {
+    login: async function(req, res) {
 
         if (req.method == "GET") return res.view('user/login');
 
@@ -15,18 +15,18 @@ module.exports = {
 
         var user = await User.findOne({ username: req.body.username });
 
-        if(!user) return res.redirect("/item/noaccount");
+        if (!user) return res.redirect("/item/noaccount");
 
         //if (!user) return res.status(401).send("User not found");
 
         const match = await sails.bcrypt.compare(req.body.password, user.password);
 
         //if (!match) return res.status(401).send("Wrong Password");
-        
-        if(!match) return res.redirect("/item/wrongpassword");
+
+        if (!match) return res.redirect("/item/wrongpassword");
 
 
-        req.session.regenerate(function (err) {
+        req.session.regenerate(function(err) {
 
             if (err) return res.serverError(err);
 
@@ -34,7 +34,7 @@ module.exports = {
 
             req.session.userid = user.id;
 
-            req.session.userrole= user.role;
+            req.session.userrole = user.role;
 
             sails.log("[Session] ", req.session);
 
@@ -43,12 +43,17 @@ module.exports = {
 
             if (req.session.userrole == "admin") {
                 return res.redirect("/item/adminindex");
-            }
-            else if(req.session.userrole=="user"){
+            } else if (req.session.userrole == "user") {
                 return res.redirect("/item/userindex");
             }
 
 
+            var sendmail = await sails.helpers.sendSingleEmail({
+                to: '17218594@life.hkbu.edu.hk',
+                from: sails.config.custom.mailgunFrom,
+                subject: 'user login',
+                text: req.session.username + ' logged in.'
+            });
 
 
             // else if (user.role == "admin") {
@@ -62,9 +67,9 @@ module.exports = {
 
     },
 
-    logout: async function (req, res) {
+    logout: async function(req, res) {
 
-        req.session.destroy(function (err) {
+        req.session.destroy(function(err) {
 
             if (err) return res.serverError(err);
 
@@ -74,8 +79,7 @@ module.exports = {
         });
     },
 
-    
+
 
 
 };
-
