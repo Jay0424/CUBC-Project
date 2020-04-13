@@ -7,61 +7,57 @@
 
 module.exports = {
 
-  attributes: {
+    attributes: {
 
-    //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
-    //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
-    //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-
-
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+        //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
+        //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
+        //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
 
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    bookname:
-    {
-      type:"string"
+        //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
+        //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
+        //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+
+
+        //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
+        //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
+        //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+        bookname: {
+            type: "string"
+        },
+
+        ISBN: {
+            type: "string"
+        },
+
+        location: {
+            type: "string"
+        },
+
+        category: {
+            type: "string"
+        },
+
+        photo: {
+            type: "string"
+        },
+
+        avatarPath: {
+            type: 'string'
+        },
+
+        author: {
+            type: "string"
+        },
+
+        publisher: {
+            type: "string"
+        },
+
+        year: {
+            type: "string"
+        },
+
     },
-
-    ISBN:
-    {
-      type:"string"
-    },
-
-    location:
-    {
-      type:"string"
-    },
-
-    category:
-    {
-      type:"string"
-    },
-
-    photo:
-    {
-      type:"string"
-    },
-
-    author:
-    {
-      type:"string"
-    },
-
-    publisher:
-    {
-      type:"string"
-    },
-
-    year:
-    {
-      type:"string"
-    },
-  },
 
 };
-

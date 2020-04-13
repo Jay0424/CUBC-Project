@@ -136,7 +136,6 @@ module.exports = {
 
     // action - adminupdate
     adminbookupdate: async function(req, res) {
-
         if (req.method == "GET") {
 
             var model = await Book.findOne(req.params.id);
@@ -161,10 +160,10 @@ module.exports = {
                 ISBN: req.body.Book.ISBN,
             }).fetch();
             if (models.length == 0) return res.notFound();
-
             return res.redirect("/book/adminbookedit");
-
         }
+
+
     },
 
     // action - delete 

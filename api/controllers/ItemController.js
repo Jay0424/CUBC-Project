@@ -8,75 +8,75 @@
 module.exports = {
 
 
-    userindex: async function (req, res) {
+    userindex: async function(req, res) {
 
 
         return res.view('item/userindex');
     },
 
-    adminindex: async function (req, res) {
+    adminindex: async function(req, res) {
 
 
         return res.view('item/adminindex');
     },
 
-    usersearch: async function (req, res) {
+    usersearch: async function(req, res) {
 
 
         return res.view('item/usersearch');
     },
 
-    vistorsearch: async function (req, res) {
+    vistorsearch: async function(req, res) {
 
 
         return res.view('item/vistorsearch');
     },
 
-    adminsearch: async function (req, res) {
+    adminsearch: async function(req, res) {
 
 
         return res.view('item/adminsearch');
     },
 
-    usernoti: async function (req, res) {
+    usernoti: async function(req, res) {
         return res.view('item/usernoti');
     },
 
-    useraccount: async function (req, res) {
+    useraccount: async function(req, res) {
         var id = req.session.userid
         var user = await User.findOne(id);
         return res.view('item/useraccount', { model: user });
     },
 
-    vistornotlogin: async function (req, res) {
+    vistornotlogin: async function(req, res) {
         return res.view('item/vistornotlogin');
     },
 
-    adminnoti: async function (req, res) {
+    adminnoti: async function(req, res) {
 
 
         return res.view('item/adminnoti');
     },
 
-    adminaccount: async function (req, res) {
+    adminaccount: async function(req, res) {
         var id = req.session.userid
         var user = await User.findOne(id);
         return res.view('item/adminaccount', { model: user });
     },
 
-    adminadditem: async function (req, res) {
+    adminadditem: async function(req, res) {
 
 
         return res.view('item/adminadditem');
     },
 
-    adminedititem: async function (req, res) {
+    adminedititem: async function(req, res) {
 
 
         return res.view('item/adminedititem');
     },
 
-    adminaddbook: async function (req, res) {
+    adminaddbook: async function(req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddbook');
@@ -84,12 +84,10 @@ module.exports = {
         if (!req.body.Book)
             return res.badRequest("Form-data not received.");
 
-        await Book.create(req.body.Book);
-
         return res.view('item/adminaddbook')
     },
 
-    adminaddgame: async function (req, res) {
+    adminaddgame: async function(req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddgame');
@@ -102,7 +100,7 @@ module.exports = {
         return res.view('item/adminaddgame')
     },
 
-    adminaddgift: async function (req, res) {
+    adminaddgift: async function(req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddgift');
@@ -115,7 +113,7 @@ module.exports = {
         return res.view('item/adminaddgift')
     },
 
-    adminaddmaterial: async function (req, res) {
+    adminaddmaterial: async function(req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddmaterial');
@@ -128,7 +126,7 @@ module.exports = {
         return res.view('item/adminaddmaterial')
     },
 
-    adminaddaccount: async function (req, res) {
+    adminaddaccount: async function(req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddaccount');
@@ -140,25 +138,24 @@ module.exports = {
 
         const hash = await sails.bcrypt.hash(password, salt);
 
-        await User.create(
-            {
-                username: req.body.username,
-                password: hash,
-                department: req.body.department,
-                position: req.body.position,
-                email: req.body.email,
-            });
+        await User.create({
+            username: req.body.username,
+            password: hash,
+            department: req.body.department,
+            position: req.body.position,
+            email: req.body.email,
+        });
 
         return res.view('item/adminaddaccount')
     },
 
-    adminuseredit: async function (req, res) {
-        var models = await User.find({role:"user"}).sort([{ id: 'DESC' }]);
+    adminuseredit: async function(req, res) {
+        var models = await User.find({ role: "user" }).sort([{ id: 'DESC' }]);
         return res.view('item/adminuseredit', { user: models });
     },
 
     // action - delete 
-    adminuserdelete: async function (req, res) {
+    adminuserdelete: async function(req, res) {
 
         if (req.method == "GET") return res.forbidden();
 
@@ -170,7 +167,7 @@ module.exports = {
 
     },
 
-    adminuserdetail: async function (req, res) {
+    adminuserdetail: async function(req, res) {
 
         var model = await User.findOne(req.params.id);
 
@@ -180,8 +177,8 @@ module.exports = {
 
     },
 
-   
-    adminuserupdate: async function (req, res) {
+
+    adminuserupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -193,7 +190,7 @@ module.exports = {
 
         } else {
 
-            
+
             // const salt = await sails.bcrypt.genSalt(10);
 
             // const password = await req.body.password;
@@ -214,8 +211,8 @@ module.exports = {
         }
     },
 
-    
-    adminaccountupdate: async function (req, res) {
+
+    adminaccountupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -227,10 +224,10 @@ module.exports = {
 
         } else {
 
-            
+
 
             var models = await User.update(req.params.id).set({
-                username:req.body.username,
+                username: req.body.username,
                 email: req.body.email,
                 department: req.body.department,
                 position: req.body.position,
@@ -242,7 +239,7 @@ module.exports = {
         }
     },
 
-    adminpasswordupdate: async function (req, res) {
+    adminpasswordupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -254,7 +251,7 @@ module.exports = {
 
         } else {
 
-            
+
             const salt = await sails.bcrypt.genSalt(10);
 
             const password = await req.body.password;
@@ -262,7 +259,7 @@ module.exports = {
             const hash = await sails.bcrypt.hash(password, salt);
 
             var models = await User.update(req.params.id).set({
-                password:hash,
+                password: hash,
             }).fetch();
             if (models.length == 0) return res.notFound();
 
@@ -271,8 +268,8 @@ module.exports = {
         }
     },
 
-    
-    useraccountupdate: async function (req, res) {
+
+    useraccountupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -285,7 +282,7 @@ module.exports = {
         } else {
 
             var models = await User.update(req.params.id).set({
-                username:req.body.username,
+                username: req.body.username,
                 email: req.body.email,
                 department: req.body.department,
                 position: req.body.position,
@@ -297,7 +294,7 @@ module.exports = {
         }
     },
 
-    userpasswordupdate: async function (req, res) {
+    userpasswordupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -309,7 +306,7 @@ module.exports = {
 
         } else {
 
-            
+
             const salt = await sails.bcrypt.genSalt(10);
 
             const password = await req.body.password;
@@ -317,7 +314,7 @@ module.exports = {
             const hash = await sails.bcrypt.hash(password, salt);
 
             var models = await User.update(req.params.id).set({
-                password:hash,
+                password: hash,
             }).fetch();
             if (models.length == 0) return res.notFound();
 
@@ -326,13 +323,13 @@ module.exports = {
         }
     },
 
-    noaccount: async function (req, res) {
+    noaccount: async function(req, res) {
 
 
         return res.view('item/noaccount');
     },
 
-    wrongpassword: async function (req, res) {
+    wrongpassword: async function(req, res) {
 
 
         return res.view('item/wrongpassword');
@@ -344,4 +341,3 @@ module.exports = {
 
 
 };
-
