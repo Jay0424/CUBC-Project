@@ -1,4 +1,5 @@
-<body onload="pageLoaded()">
+<body>
+    <!-- <body onload="pageLoaded()"> -->
     <div class="container">
 
         <form action="/item/adminaddbook" method="POST">
@@ -45,8 +46,8 @@
 
                 <div class="col-xl-6 col-form-label">
                     <label>相片:</label>
-                    <input type="url" class="form-control" name="Book[photo]" required>
-                    <!-- <input type="file" accept="image/*" name="book[photo]" /> -->
+                    <!-- <input type="url" class="form-control" name="Book[photo]" required> -->
+                    <input type="file" accept="image/*" name="book[photo]" required />
                 </div>
 
                 <button type="submit" class="btn btn-primary center">增加</button>

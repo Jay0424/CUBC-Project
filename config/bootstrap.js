@@ -42,7 +42,7 @@ module.exports.bootstrap = async function() {
             year: "2020",
             publisher: "幸福文化",
             photo: "https://www.books.com.tw/img/001/084/50/0010845024.jpg",
-            avatarPath: "https://www.books.com.tw/img/001/084/50/0010845024.jpg",
+            //    avatarPath: "https://www.books.com.tw/img/001/084/50/0010845024.jpg",
         },
 
         {
@@ -54,7 +54,7 @@ module.exports.bootstrap = async function() {
             year: "2020",
             publisher: "幸福文化",
             photo: "https://www.books.com.tw/img/001/084/50/0010845024.jpg",
-            avatarPath: "https://www.books.com.tw/img/001/084/50/0010845024.jpg",
+            // avatarPath: "https://www.books.com.tw/img/001/084/50/0010845024.jpg",
 
         },
 
@@ -67,7 +67,7 @@ module.exports.bootstrap = async function() {
             year: "2020",
             publisher: "水靈文創",
             photo: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/084/01/0010840192.jpg&v=5dc55fd1&w=250&h=250",
-            avatarPath: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/084/01/0010840192.jpg&v=5dc55fd1&w=250&h=250",
+            // avatarPath: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/084/01/0010840192.jpg&v=5dc55fd1&w=250&h=250",
         },
 
         {
@@ -79,7 +79,7 @@ module.exports.bootstrap = async function() {
             year: "2020",
             publisher: "水靈文創",
             photo: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/084/01/0010840192.jpg&v=5dc55fd1&w=250&h=250",
-            avatarPath: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/084/01/0010840192.jpg&v=5dc55fd1&w=250&h=250",
+            // avatarPath: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/084/01/0010840192.jpg&v=5dc55fd1&w=250&h=250",
 
         },
 
@@ -92,7 +92,7 @@ module.exports.bootstrap = async function() {
             year: "2019",
             publisher: "遠流",
             photo: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/081/41/0010814172.jpg&v=5c63ffbb&w=250&h=250",
-            avatarPath: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/081/41/0010814172.jpg&v=5c63ffbb&w=250&h=250",
+            // avatarPath: "https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/081/41/0010814172.jpg&v=5c63ffbb&w=250&h=250",
         },
 
     ]);

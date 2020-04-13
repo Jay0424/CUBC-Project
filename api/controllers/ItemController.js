@@ -76,6 +76,25 @@ module.exports = {
         return res.view('item/adminedititem');
     },
 
+
+    adminUpload: async function(req, res) {
+
+        if (req.method == 'GET')
+            return res.view('item/adminupload');
+
+        req.file('avatarfile').upload({ maxBytes: 10000000 }, async function whenDone(err, uploadedFiles) {
+            if (err) { return res.serverError(err); }
+            if (uploadedFiles.length === 0) { return res.badRequest('No file was uploaded'); }
+
+            await Book.update({ username: req.session.username }, {
+                avatarPath: uploadedFiles[0].fd
+            });
+
+            return res.ok('File uploaded.');
+        });
+    },
+
+
     adminaddbook: async function(req, res) {
 
         if (req.method == "GET")
@@ -83,6 +102,8 @@ module.exports = {
 
         if (!req.body.Book)
             return res.badRequest("Form-data not received.");
+
+        await Book.create(req.body.Book);
 
         return res.view('item/adminaddbook')
     },
