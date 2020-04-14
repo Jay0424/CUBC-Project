@@ -1,36 +1,64 @@
 <body onload="pageLoaded()">
-    <div class="container">
 
-        <form action="/item/adminUpload" method="post" enctype="multipart/form-data">
-            <input type="file" accept="image/*" name="avatarfile" />
-            <input type="submit" />
-        </form>
-    </div>
+    <form action="/item/adminupload" method="post">
+        <input type="file" accept="image/*" onchange="handleFile(this.files)" />
+        <div id="preview"></div>
+        <input type="submit" />
+        </div>
+    </form>
+
+    <script>
+        function handleFile(files) {
+
+            const file = files[0];
+            if (!file.type.startsWith('image/')) return;
+
+            var preview = document.getElementById('preview');
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                preview.innerHTML = "";
+
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.style = "max-width:33vw";
+                preview.appendChild(img);
+
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'User[avatarpath]';
+                input.value = e.target.result;
+                preview.appendChild(input);
+            }
+            reader.readAsDataURL(file);
+
+        }
+    </script>
 
 
     <nav class="bottomnav fixed-bottom">
         <a href="/item/adminindex" class="nav__link">
             <i class="material-icons">
-                    home
-                </i>
+                home
+            </i>
             <span class="nav__text">主頁</span>
         </a>
         <a href="/item/adminsearch" class="nav__link nav__link--active">
             <i class="material-icons">
-                    search
-                </i>
+                search
+            </i>
             <span class="nav__text">搜尋</span>
         </a>
         <a href="/item/adminnoti" class="nav__link">
             <i class="material-icons">
-                    email
-                </i>
+                email
+            </i>
             <span class="nav__text">通知</span>
         </a>
         <a href="/item/adminaccount" class="nav__link">
             <i class="material-icons">
-                    account_circle
-                </i>
+                account_circle
+            </i>
             <span class="nav__text">帳戶</span>
         </a>
     </nav>

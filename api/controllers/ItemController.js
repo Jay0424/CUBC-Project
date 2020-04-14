@@ -82,16 +82,13 @@ module.exports = {
         if (req.method == 'GET')
             return res.view('item/adminupload');
 
-        req.file('avatarfile').upload({ maxBytes: 10000000 }, async function whenDone(err, uploadedFiles) {
-            if (err) { return res.serverError(err); }
-            if (uploadedFiles.length === 0) { return res.badRequest('No file was uploaded'); }
+        // console.log('req.body.agree = ' + req.body.agree);
 
-            await Book.update({ username: req.session.username }, {
-                avatarPath: uploadedFiles[0].fd
-            });
-
-            return res.ok('File uploaded.');
+        await Book.update({ username: req.session.username }, {
+            avatar: req.body.Book.avatarpath
         });
+
+        return res.ok('File uploaded.');
     },
 
 
@@ -103,9 +100,25 @@ module.exports = {
         if (!req.body.Book)
             return res.badRequest("Form-data not received.");
 
-        await Book.create(req.body.Book);
+        await Book.create(req.body.Book, { avatarPath: req.body.Book.avatarPath });
 
-        return res.view('item/adminaddbook')
+        // await Book.update({ username: req.session.username }, {
+        //     avatar: req.body.Book.avatarpath
+        // });
+
+        // req.file('avatarfile').upload({ maxBytes: 10000000 }, async function whenDone(err, uploadedFiles) {
+        //     if (err) { return res.serverError(err); }
+        //     if (uploadedFiles.length === 0) { return res.badRequest('No file was uploaded'); }
+
+        //     await Book.update({ username: req.session.username }, {
+        //         avatarPath: uploadedFiles[0].fd
+        //     });
+
+        //     return res.ok('File uploaded.');
+        // });
+
+
+        // return res.view('item/adminaddbook')
     },
 
     adminaddgame: async function(req, res) {
