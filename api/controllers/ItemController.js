@@ -9,37 +9,35 @@ module.exports = {
 
 
     userindex: async function(req, res) {
-
-
         return res.view('item/userindex');
     },
 
     adminindex: async function(req, res) {
-
-
         return res.view('item/adminindex');
     },
 
     usersearch: async function(req, res) {
-
-
         return res.view('item/usersearch');
     },
 
     vistorsearch: async function(req, res) {
-
-
         return res.view('item/vistorsearch');
     },
 
+    vistornotlogin: async function(req, res) {
+        return res.view('item/vistornotlogin');
+    },
+
     adminsearch: async function(req, res) {
-
-
         return res.view('item/adminsearch');
     },
 
     usernoti: async function(req, res) {
         return res.view('item/usernoti');
+    },
+
+    adminnoti: async function(req, res) {
+        return res.view('item/adminnoti');
     },
 
     useraccount: async function(req, res) {
@@ -48,15 +46,6 @@ module.exports = {
         return res.view('item/useraccount', { model: user });
     },
 
-    vistornotlogin: async function(req, res) {
-        return res.view('item/vistornotlogin');
-    },
-
-    adminnoti: async function(req, res) {
-
-
-        return res.view('item/adminnoti');
-    },
 
     adminaccount: async function(req, res) {
         var id = req.session.userid
@@ -65,18 +54,17 @@ module.exports = {
     },
 
     adminadditem: async function(req, res) {
-
-
         return res.view('item/adminadditem');
     },
 
     adminedititem: async function(req, res) {
-
-
         return res.view('item/adminedititem');
     },
 
 
+    //
+    //
+    //have not finished testing : below
     adminUpload: async function(req, res) {
 
         await Book.update({ username: req.session.username }, {
