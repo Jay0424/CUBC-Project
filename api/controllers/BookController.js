@@ -7,13 +7,15 @@
 
 module.exports = {
 
-    Bookqrcode: async function(req, res) {
-        return res.view('book/bookqrcode');
-    },
+    //not used
+    // Bookqrcode: async function(req, res) {
+    //     return res.view('book/bookqrcode');
+    // },
 
-    bookqrhistory: async function(req, res) {
-        return res.view('book/bookqrhistory');
-    },
+    //not used
+    // bookqrhistory: async function(req, res) {
+    //     return res.view('book/bookqrhistory');
+    // },
 
     userbooksearch: async function(req, res) {
         var models = await Book.find().sort([{ id: 'DESC' }]);

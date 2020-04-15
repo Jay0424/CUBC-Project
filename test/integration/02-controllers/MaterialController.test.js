@@ -1,50 +1,23 @@
 const supertest = require('supertest');
 const Async = require('async');
 
-describe('BookController', function() {
+describe('MaterialController', function() {
 
     let cookie;
 
     // have not finished:
-    // adminbookdetail userbookdetail vistorbookdetail adminbookdelete adminbookupdate
+    // adminmaterialdetail usermaterialdetail vistormaterialdetail adminmaterialdelete adminmaterialupdate
 
-
-    describe(`#vistor[Search] Click search 'BOOK' without login`, function() {
-        it('should return booksearch page', function(done) {
+    describe(`#vistor[Search] Click search 'material' without login`, function() {
+        it('should return materialsearch page', function(done) {
             supertest(sails.hooks.http.app)
-                .post('/book/vistorbooksearch')
-                .expect(200, done);
+                .post('/material/vistormaterialsearch')
+                .expect(404, done);
         });
     });
 
-    describe(`#Vistor[Result] Click search 'Book' without login`, function() {
-        it('should return vistorbookresult page', function(done) {
-            Async.series([
-                function(vr) {
-                    supertest(sails.hooks.http.app)
-                        .post('/book/vistorbooksearch')
-                        .send({ category: '小說' })
-                        .expect(200)
-                        .then(res => {
-                            const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
-                            cookie = cookies.join(';');
-                            vr();
-                        });
-                },
-                function(vr) {
-                    supertest(sails.hooks.http.app)
-                        .post('/book/vistorbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
-                        .set('Cookie', cookie)
-                        .expect(200, vr);
-                }
-            ], done);
-        });
-    });
-
-
-
-    describe(`#admin[Search] Click search 'Book' with admin login`, function() {
-        it('should return adminbooksearch page', function(done) {
+    describe(`#admin[Search] Click search 'material' with admin login`, function() {
+        it('should return adminmaterialsearch page', function(done) {
             Async.series([
                 function(cb) {
                     supertest(sails.hooks.http.app)
@@ -59,7 +32,7 @@ describe('BookController', function() {
                 },
                 function(cb) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/adminbooksearch')
+                        .post('/material/adminmaterialsearch')
                         .set('Cookie', cookie)
                         .expect(200, cb);
                 }
@@ -67,8 +40,8 @@ describe('BookController', function() {
         });
     });
 
-    describe(`#admin[Result] Click search 'Book' with admin login`, function() {
-        it('should return adminbookresult page', function(done) {
+    describe(`#admin[Result] Click search 'material' with admin login`, function() {
+        it('should return adminmaterialresult page', function(done) {
             Async.series([
                 function(vr) {
                     supertest(sails.hooks.http.app)
@@ -83,8 +56,8 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/vistorbooksearch')
-                        .send({ category: '小說' })
+                        .post('/material/adminmaterialsearch')
+                        .send({ category: '文具' })
                         .expect(200)
                         .then(res => {
                             const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
@@ -94,7 +67,7 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/adminbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
+                        .post('/material/adminmaterialresult?category=%E6%96%87%E5%85%B7&materialname=&amount=')
                         .set('Cookie', cookie)
                         .expect(200, vr);
                 }
@@ -103,8 +76,8 @@ describe('BookController', function() {
     });
 
 
-    describe(`#user[Search] Click search 'Book' with user login`, function() {
-        it('should return userbooksearch page', function(done) {
+    describe(`#user[Search] Click search 'material' with user login`, function() {
+        it('should return usermaterialsearch page', function(done) {
             Async.series([
                 function(cb) {
                     supertest(sails.hooks.http.app)
@@ -119,7 +92,7 @@ describe('BookController', function() {
                 },
                 function(cb) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/userbooksearch')
+                        .post('/material/usermaterialsearch')
                         .set('Cookie', cookie)
                         .expect(200, cb);
                 }
@@ -127,8 +100,8 @@ describe('BookController', function() {
         });
     });
 
-    describe(`#user[Result] Click search 'Book' with user login`, function() {
-        it('should return userbookresult page', function(done) {
+    describe(`#user[Result] Click search 'material' with user login`, function() {
+        it('should return usermaterialresult page', function(done) {
             Async.series([
                 function(vr) {
                     supertest(sails.hooks.http.app)
@@ -143,8 +116,8 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/userbooksearch')
-                        .send({ category: '小說' })
+                        .post('/material/usermaterialsearch')
+                        .send({ category: '文具' })
                         .expect(200)
                         .then(res => {
                             const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
@@ -154,7 +127,7 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/userbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
+                        .post('/material/adminmaterialresult?category=%E6%96%87%E5%85%B7&materialname=&amount=')
                         .set('Cookie', cookie)
                         .expect(200, vr);
                 }
@@ -164,9 +137,9 @@ describe('BookController', function() {
 
 
     describe(`#amin[edit]`, function() {
-        it('should return adminbookedit page', function(done) {
+        it('should return adminmaterialedit page', function(done) {
             supertest(sails.hooks.http.app)
-                .post('/book/adminbookedit')
+                .post('/material/adminmaterialedit')
                 .expect(200, done);
         });
     });

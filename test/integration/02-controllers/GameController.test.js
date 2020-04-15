@@ -1,29 +1,29 @@
 const supertest = require('supertest');
 const Async = require('async');
 
-describe('BookController', function() {
+describe('GameController', function() {
 
     let cookie;
 
     // have not finished:
-    // adminbookdetail userbookdetail vistorbookdetail adminbookdelete adminbookupdate
+    // admingamedetail usergamedetail vistorgamedetail admingamedelete admingameupdate
 
 
-    describe(`#vistor[Search] Click search 'BOOK' without login`, function() {
-        it('should return booksearch page', function(done) {
+    describe(`#vistor[Search] Click search 'Game' without login`, function() {
+        it('should return gamesearch page', function(done) {
             supertest(sails.hooks.http.app)
-                .post('/book/vistorbooksearch')
+                .post('/game/vistorgamesearch')
                 .expect(200, done);
         });
     });
 
-    describe(`#Vistor[Result] Click search 'Book' without login`, function() {
-        it('should return vistorbookresult page', function(done) {
+    describe(`#Vistor[Result] Click search 'game' without login`, function() {
+        it('should return vistorgameresult page', function(done) {
             Async.series([
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/vistorbooksearch')
-                        .send({ category: '小說' })
+                        .post('/game/vistorgamesearch')
+                        .send({ category: '棋類遊戲' })
                         .expect(200)
                         .then(res => {
                             const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
@@ -33,7 +33,7 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/vistorbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
+                        .post('/game/vistorgameresult?category=%E6%A3%8B%E9%A1%9E%E9%81%8A%E6%88%B2&gamename=&publisher=&serialno=')
                         .set('Cookie', cookie)
                         .expect(200, vr);
                 }
@@ -43,8 +43,8 @@ describe('BookController', function() {
 
 
 
-    describe(`#admin[Search] Click search 'Book' with admin login`, function() {
-        it('should return adminbooksearch page', function(done) {
+    describe(`#admin[Search] Click search 'Game' with admin login`, function() {
+        it('should return admingamesearch page', function(done) {
             Async.series([
                 function(cb) {
                     supertest(sails.hooks.http.app)
@@ -59,7 +59,7 @@ describe('BookController', function() {
                 },
                 function(cb) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/adminbooksearch')
+                        .post('/game/admingamesearch')
                         .set('Cookie', cookie)
                         .expect(200, cb);
                 }
@@ -67,8 +67,8 @@ describe('BookController', function() {
         });
     });
 
-    describe(`#admin[Result] Click search 'Book' with admin login`, function() {
-        it('should return adminbookresult page', function(done) {
+    describe(`#admin[Result] Click search 'game' with admin login`, function() {
+        it('should return admingameresult page', function(done) {
             Async.series([
                 function(vr) {
                     supertest(sails.hooks.http.app)
@@ -83,8 +83,8 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/vistorbooksearch')
-                        .send({ category: '小說' })
+                        .post('/game/vistorgamesearch')
+                        .send({ category: '棋類遊戲' })
                         .expect(200)
                         .then(res => {
                             const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
@@ -94,7 +94,7 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/adminbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
+                        .post('/game/admingameresult?category=%E6%A3%8B%E9%A1%9E%E9%81%8A%E6%88%B2&gamename=&publisher=&serialno=')
                         .set('Cookie', cookie)
                         .expect(200, vr);
                 }
@@ -103,8 +103,8 @@ describe('BookController', function() {
     });
 
 
-    describe(`#user[Search] Click search 'Book' with user login`, function() {
-        it('should return userbooksearch page', function(done) {
+    describe(`#user[Search] Click search 'game' with user login`, function() {
+        it('should return usergamesearch page', function(done) {
             Async.series([
                 function(cb) {
                     supertest(sails.hooks.http.app)
@@ -119,7 +119,7 @@ describe('BookController', function() {
                 },
                 function(cb) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/userbooksearch')
+                        .post('/game/usergamesearch')
                         .set('Cookie', cookie)
                         .expect(200, cb);
                 }
@@ -127,8 +127,8 @@ describe('BookController', function() {
         });
     });
 
-    describe(`#user[Result] Click search 'Book' with user login`, function() {
-        it('should return userbookresult page', function(done) {
+    describe(`#user[Result] Click search 'game' with user login`, function() {
+        it('should return usergameresult page', function(done) {
             Async.series([
                 function(vr) {
                     supertest(sails.hooks.http.app)
@@ -143,8 +143,8 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/userbooksearch')
-                        .send({ category: '小說' })
+                        .post('/game/usergamesearch')
+                        .send({ category: '棋類遊戲' })
                         .expect(200)
                         .then(res => {
                             const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
@@ -154,7 +154,7 @@ describe('BookController', function() {
                 },
                 function(vr) {
                     supertest(sails.hooks.http.app)
-                        .post('/book/userbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
+                        .post('/game/usergameresult?category=%E6%A3%8B%E9%A1%9E%E9%81%8A%E6%88%B2&gamename=&publisher=&serialno=')
                         .set('Cookie', cookie)
                         .expect(200, vr);
                 }
@@ -164,9 +164,9 @@ describe('BookController', function() {
 
 
     describe(`#amin[edit]`, function() {
-        it('should return adminbookedit page', function(done) {
+        it('should return admingameedit page', function(done) {
             supertest(sails.hooks.http.app)
-                .post('/book/adminbookedit')
+                .post('/game/admingameedit')
                 .expect(200, done);
         });
     });
