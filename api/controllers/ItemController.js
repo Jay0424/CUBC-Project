@@ -77,19 +77,19 @@ module.exports = {
     },
 
 
-    adminUpload: async function(req, res) {
+    // adminUpload: async function(req, res) {
 
-        if (req.method == 'GET')
-            return res.view('item/adminupload');
+    //     if (req.method == 'GET')
+    //         return res.view('item/adminupload');
 
-        // console.log('req.body.agree = ' + req.body.agree);
+    //     // console.log('req.body.agree = ' + req.body.agree);
 
-        await Book.update({ username: req.session.username }, {
-            avatar: req.body.Book.avatarpath
-        });
+    //     await Book.update({ username: req.session.username }, {
+    //         avatar: req.body.Book.avatarPath
+    //     });
 
-        return res.ok('File uploaded.');
-    },
+    //     return res.ok('File uploaded.');
+    // },
 
 
     adminaddbook: async function(req, res) {
@@ -100,8 +100,9 @@ module.exports = {
         if (!req.body.Book)
             return res.badRequest("Form-data not received.");
 
-        await Book.create(req.body.Book, { avatarPath: req.body.Book.avatarPath });
+        await Book.create(req.body.Book);
 
+        // await Book.create(req.body.Book, { avatarPath: req.body.Book.avatarPath });
         // await Book.update({ username: req.session.username }, {
         //     avatar: req.body.Book.avatarpath
         // });

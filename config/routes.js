@@ -137,8 +137,8 @@ module.exports.routes = {
 
 
 
-    //admin
-    'POST  /item/adminUpload': 'ItemController.adminUpload',
+    // //admin
+    // 'POST  /item/adminUpload': 'ItemController.adminUpload',
 
 
 
