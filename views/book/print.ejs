@@ -1,27 +1,64 @@
 <!DOCTYPE html>
-<link rel="stylesheet" media="print"  href="print.css">
+<link rel="stylesheet" media="print" href="print.css">
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<title>Persons</title>
-	<style>
-	html, body {
-		width: 248mm;
-	}
-	</style>
+    <meta charset="utf-8">
+    <title>Persons</title>
+    <style>
+        html,
+        body {
+            width: 248mm;
+        }
+    </style>
 </head>
 
 <body>
-	<% book.forEach(model => { %>
-		<div style="margin-bottom:1em">
-			<h5> <%=model.itemtype%> <%= model.id %></h5>
-			<div><h5><%= model.bookname %></h5></div>
-			<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<%=model.bookname%>">
-		</div>
-	<% }); %>
-	<script>
-		window.print();
-		window.onfocus = () => window.close();
-	</script>
+    <% book.forEach(model => { %>
+        <div style="margin-bottom:1em">
+            <h5>
+                <%=model.itemtype%>
+                    <%= model.id %>
+            </h5>
+            <div>
+                <h5>
+                    <%= model.bookname %>
+                </h5>
+            </div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<%=model.bookname%>">
+        </div>
+        <% }); %>
+            <nav class="bottomnav fixed-bottom">
+                <a href="/item/adminindex" class="nav__link">
+                    <i class="material-icons">
+				home
+			</i>
+                    <span class="nav__text">主頁</span>
+                </a>
+                <a href="/item/adminsearch" class="nav__link nav__link--active">
+                    <i class="material-icons">
+				search
+			</i>
+                    <span class="nav__text">搜尋</span>
+                </a>
+                <a href="/item/adminnoti" class="nav__link">
+                    <i class="material-icons">
+				email
+			</i>
+                    <span class="nav__text">通知</span>
+                </a>
+                <a href="/item/adminaccount" class="nav__link">
+                    <i class="material-icons">
+				account_circle
+			</i>
+                    <span class="nav__text">帳戶</span>
+                </a>
+            </nav>
+
+            <script>
+                window.print();
+                window.onfocus = () => window.close();
+            </script>
 </body>
+
 </html>

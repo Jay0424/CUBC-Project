@@ -1,9 +1,9 @@
 <body onload="pageLoaded()">
     <div class="container">
         <h2 class="center">書本搜尋</h2>
-        <label>種類:</label>
-        <form action="/book/vistorbookresult" method="GET">
+        <form action="/book/vistorbookresult" method="GET" autocomplete="on">
             <div class="form-group">
+                <label>種類:</label>
                 <select name="category" class="form-control">
                     <option value=""></option>
                     <option value="成長系列">成長系列</option>
@@ -11,6 +11,7 @@
                     <option value="家庭關係">家庭關係</option>
                     <option value="情緒教育">情緒教育</option>
                 </select>
+                <!-- <input type="String" class="form-control" name="category"> -->
             </div>
             <div class="form-group">
                 <label>編號:</label>
@@ -43,7 +44,7 @@
                                     <span id="briefinfo">編號:</span>
                                     <%= model.no %>
                                 </li>
-                                
+
                                 <li class="list-group-item" id="info">
                                     <span id="briefinfo">書名:</span>
                                     <%= model.bookname %>

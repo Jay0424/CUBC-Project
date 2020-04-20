@@ -6,6 +6,10 @@
 
         <br>
         <br>
+        <form action="/gift/print" method="GET">
+            <button class="center btn btn-secondary" type="submit" class="btn btn-primary">
+                打印QR code</button>
+        </form>
 
         <h4 class="center"><b>禮物列表</b></h4>
 
@@ -15,43 +19,44 @@
                 <% gift.forEach( function(model) { %>
 
 
-                <tr class="tr2">
+                    <tr class="tr2">
 
-                    <th scope="row"></th>
-                    <td><a href="/gift/admingiftdetail/<%=model.id%>"><%=model.giftname%></a></td>
-                    <!-- <td><img src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=<%=model.id%>"></td> -->
-                    <td>
-                        <form action="/gift/uploadphoto/<%=model.id%>" method="GET">
-                            <button type="submit" class="btn btn-primary center">上傳相片</button>
-                        </form>
-                    </td>
-                    <td>
-                        <a href="/gift/admingiftupdate/<%=model.id%>" class="btn btn-primary" id="edit">
+                        <th scope="row"></th>
+                        <td>
+                            <a href="/gift/admingiftdetail/<%=model.id%>">
+                                <%=model.giftname%>
+                            </a>
+                        </td>
+                        <!-- <td><img src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=<%=model.id%>"></td> -->
+                        <td>
+                            <form action="/gift/uploadphoto/<%=model.id%>" method="GET">
+                                <button type="submit" class="btn btn-primary center">上傳相片</button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="/gift/admingiftupdate/<%=model.id%>" class="btn btn-primary" id="edit">
                             修改
                         </a>
-                    </td>
-                    <td>
-                        <span id="deleteid"><%= model.id %></span>
+                        </td>
+                        <td>
+                            <span id="deleteid"><%= model.id %></span>
 
-                        <form action="/gift/admingiftdelete/<%=model.id%>"  method="POST">
-                            <button type="submit" class="btn btn-danger">
+                            <form action="/gift/admingiftdelete/<%=model.id%>" method="POST">
+                                <button type="submit" class="btn btn-danger">
                                 刪除</button>
-                        </form>
+                            </form>
 
-                    </td>
+                        </td>
 
-                </tr>
+                    </tr>
 
 
-                <% }); %>
+                    <% }); %>
 
             </table>
         </div>
 
-        <!-- <form action="/gift/print" method="GET">
-            <button class="center btn btn-secondary" type="submit" class="btn btn-primary">
-                打印QR code</button>
-        </form> -->
+
 
 
 
