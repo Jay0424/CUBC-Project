@@ -83,6 +83,16 @@ module.exports = {
 
     },
 
+    usergiftdetail2: async function (req, res) {
+
+        var model = await Gift.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('gift/usergiftdetail2', { gift: model });
+
+    },
+
     admingiftsearch: async function (req, res) {
         var models = await Gift.find().sort([{ id: 'DESC' }]);
         return res.view('gift/admingiftsearch', { gift: models });
@@ -207,6 +217,79 @@ module.exports = {
 
         return res.redirect("/gift/admingiftedit");
 
+    },
+
+    import_xlsx: async function(req, res) {
+
+        if (req.method == 'GET')
+            return res.view('gift/import_xlsx');
+    
+        req.file('file').upload({maxBytes: 10000000}, async function whenDone(err, uploadedFiles) {
+            if (err) { return res.serverError(err); }
+            if (uploadedFiles.length === 0){ return res.badRequest('No file was uploaded'); }
+    
+            var XLSX = require('xlsx');
+            var workbook = XLSX.readFile(uploadedFiles[0].fd);
+            var ws = workbook.Sheets[workbook.SheetNames[0]];
+            var data = XLSX.utils.sheet_to_json(ws);
+            console.log(data);
+            var models = await Gift.createEach(data).fetch();
+            if (models.length == 0) {
+                return res.badRequest("No data imported.");
+            }
+            return res.redirect("/gift/admingiftedit");
+        });
+    },
+
+    borrow: async function(req, res) {
+        var model=await Gift.findOne(req.params.id)
+        return res.view('gift/borrow',{gift:model});
+    },
+
+    return: async function(req, res) {
+        return res.view('gift/return');
+    },
+
+    print: async function (req, res) {
+        var models = await Gift.find().sort([{ id: 'DESC' }]);
+        return res.view('gift/print', { gift: models });
+        
+    },
+
+    useraddremark: async function (req, res) {
+        var model = await Gift.findOne(req.params.id);
+        if (req.method == "GET") {
+            return res.view('gift/useraddremark', { gift: model })
+        } else {
+
+            var userremarks = req.body.remarks;
+
+            await Item.create(
+                {
+                    message:"禮物("+model.giftname+")新增備註: "+userremarks,
+                });
+
+
+            var models = await Gift.update(req.params.id).set({
+                remarks: userremarks,
+            }).fetch();
+            if (models.length == 0) return res.notFound();
+
+            return res.view('gift/usergiftdetail', { gift: model })
+        }
+    },
+
+    uploadphoto: async function(req, res) {
+        var model=await Gift.findOne(req.params.id);
+
+        if (req.method == 'GET')
+            return res.view('gift/uploadphoto',{gift:model});
+    
+        await Gift.update({id: model.id}, {
+            avatar: req.body.Gift.avatar
+        });
+        
+        return res.redirect('/gift/admingiftedit');
     },
 
 

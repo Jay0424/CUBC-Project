@@ -2,10 +2,12 @@
     <div class="container">
         <br>
 
-        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center">
+        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center2">
 
         <br>
         <br>
+
+        <h4 class="center"><b>書藉列表</b></h4>
 
         <div class="table-responsive">
             <table class="table " id="admintable">
@@ -13,38 +15,41 @@
                 <% book.forEach( function(model) { %>
 
 
-                    <tr class="tr2">
+                <tr class="tr2">
 
-                        <th scope="row"></th>
-                        <td>
-                            <a href="/book/adminbookdetail/<%=model.id%>">
-                                <%=model.bookname%>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="/book/adminbookupdate/<%=model.id%>" class="btn btn-primary" id="edit">
+                    <th scope="row"></th>
+                    <td><a href="/book/adminbookdetail/<%=model.id%>"><%=model.bookname%></a></td>
+                    <td>
+                        <form action="/book/uploadphoto/<%=model.id%>" method="GET">
+                            <button type="submit" class="btn btn-primary center">上傳相片</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="/book/adminbookupdate/<%=model.id%>" class="btn btn-primary" id="edit">
                             修改
                         </a>
-                        </td>
-                        <td>
-                            <span id="deleteid"><%= model.id %></span>
+                    </td>
+                    <td>
+                        <span id="deleteid"><%= model.id %></span>
 
-                            <form action="/book/adminbookdelete/<%=model.id%>" method="POST">
-                                <button type="submit" class="btn btn-danger">
+                        <form action="/book/adminbookdelete/<%=model.id%>" method="POST">
+                            <button type="submit" class="btn btn-danger">
                                 刪除</button>
-                            </form>
+                        </form>
 
-                        </td>
+                    </td>
 
-                    </tr>
+                </tr>
 
 
-                    <% }); %>
+                <% }); %>
 
             </table>
         </div>
-
-
+        <form action="/book/print" method="GET">
+            <button class="center btn btn-secondary" type="submit">
+                打印QR code</button>
+        </form>
 
         <nav class="bottomnav fixed-bottom">
             <a href="/item/adminindex" class="nav__link">

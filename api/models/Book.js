@@ -7,57 +7,153 @@
 
 module.exports = {
 
-    attributes: {
+  attributes: {
 
-        //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
-        //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
-        //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-
-
-        //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-        //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-        //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+    //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
+    //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
+    //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
 
-        //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-        //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-        //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-        bookname: {
-            type: "string"
-        },
+    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
+    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
+    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
-        ISBN: {
-            type: "string"
-        },
 
-        location: {
-            type: "string"
-        },
+    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
+    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
+    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    bookname:
+    {
+      type:"string",
+    },
 
-        category: {
-            type: "string"
-        },
+    itemtype:{
+      type:"string",
+      defaultsTo:"書籍"
+    },
 
-        photo: {
-            type: "string"
-        },
+    ISBN:
+    {
+      type:"string"
+    },
 
-        avatarPath: {
-            type: 'string'
-        },
+    location:
+    {
+      type:"string"
+    },
 
-        author: {
-            type: "string"
-        },
+    category:
+    {
+      type:"string"
+    },
 
-        publisher: {
-            type: "string"
-        },
+    photo:
+    {
+      type:"string"
+    },
 
-        year: {
-            type: "string"
-        },
+    author:
+    {
+      type:"string"
+    },
+
+    publisher:
+    {
+      type:"string"
+    },
+
+    year:
+    {
+      type:"string"
+    },
+
+    bookborrowBy:{
+      collection:"User",
+      via:"bookborrow"
+    },
+
+    bookhistoryBy:{
+      collection:"User",
+      via:"bookhistory"
+    },
+
+    bookreserveBy:{
+      collection:'User',
+      via:"bookreserve"
 
     },
 
+    borrowdate:{
+      type:"string",
+    },
+
+    expired:{
+      type:"string",
+      defaultsTo:"30"
+    },
+
+    reserveto:{
+      type:"string",
+    },
+
+    status:{
+      type:"string",
+      defaultsTo:"可借取"
+    },
+
+    avatarPath: {
+      type: 'string'
+    },
+
+    avatar:{
+      type:'string'
+    },
+
+    label:{
+      type:'string',
+    },
+
+    remarks:{
+      type:'string',
+      defaultsTo:""
+    },
+
+    borrowinfo:{
+      type:'string',
+      defaultsTo:""
+    },
+
+    returninfo:{
+      type:'string',
+      defaultsTo:"",
+    },
+
+    borrowperson:{
+      type:'string'
+    },
+
+    reserveperson:{
+      type:'string'
+    },
+
+    no:{
+      type:'string'
+    },
+
+    compversion:{
+      type:'string'
+    }
+
+    
+
+
+    
+
+
+
+
+
+  },
+
 };
+

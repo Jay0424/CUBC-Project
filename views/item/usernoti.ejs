@@ -7,12 +7,17 @@
         <br>
         <br>
 
-
-
-
         <h2 style="color: wheat; background-color: darkred;"> &nbsp;&nbsp;收到的通知</h2>
 
-        <div>
+        <% noti.forEach(function(model) { %>
+            <div class="square2 center">
+                <%=new Date(model.createdAt).toLocaleDateString()%> <%=model.message%>
+            </div>
+            <br>
+        <% }); %>
+
+        
+        <!-- <div>
             <div class="square2 center">
                 <strong>3月21日</strong>&nbsp; 你的申請(書籍)曼巴精神已接納。
             </div>
@@ -26,7 +31,7 @@
                 <strong>3月10日</strong>&nbsp; 你的申請(物資)IPAD已被拒絕。
             </div>
 
-        </div>
+        </div> -->
 
 
         <nav class="bottomnav fixed-bottom">

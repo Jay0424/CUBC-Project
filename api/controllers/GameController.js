@@ -8,7 +8,7 @@
 module.exports = {
 
     usergamesearch: async function (req, res) {
-        var models = await Game.find().sort([{id:'DESC'}]);
+        var models = await Game.find().sort([{ id: 'DESC' }]);
         return res.view('game/usergamesearch', { game: models});
     },
 
@@ -40,6 +40,36 @@ module.exports = {
         if (!model) return res.notFound();
 
         return res.view('game/usergamedetail', { game: model });
+
+    },
+
+    usergamedetail2: async function (req, res) {
+
+        var model = await Game.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('game/usergamedetail2', { game: model });
+
+    },
+
+    usergamereturn: async function (req, res) {
+
+        var model = await Game.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('game/usergamereturn', { game: model });
+
+    },
+
+    usergamereserve: async function (req, res) {
+
+        var model = await Game.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('game/usergamereserve', { game: model });
 
     },
 
@@ -162,6 +192,78 @@ module.exports = {
 
         return res.redirect("/game/admingameedit");
 
+    },
+
+    import_xlsx: async function(req, res) {
+
+        if (req.method == 'GET')
+            return res.view('game/import_xlsx');
+    
+        req.file('file').upload({maxBytes: 10000000}, async function whenDone(err, uploadedFiles) {
+            if (err) { return res.serverError(err); }
+            if (uploadedFiles.length === 0){ return res.badRequest('No file was uploaded'); }
+    
+            var XLSX = require('xlsx');
+            var workbook = XLSX.readFile(uploadedFiles[0].fd);
+            var ws = workbook.Sheets[workbook.SheetNames[0]];
+            var data = XLSX.utils.sheet_to_json(ws);
+            console.log(data);
+            var models = await Game.createEach(data).fetch();
+            if (models.length == 0) {
+                return res.badRequest("No data imported.");
+            }
+            return res.redirect("/game/admingameedit");
+        });
+    },
+
+    borrow: async function(req, res) {
+        return res.view('game/borrow');
+    },
+
+    return: async function(req, res) {
+        return res.view('game/return');
+    },
+
+    print: async function (req, res) {
+        var models = await Game.find().sort([{ id: 'DESC' }]);
+        return res.view('game/print', { game: models });
+        
+    },
+
+    useraddremark: async function (req, res) {
+        var model = await Game.findOne(req.params.id);
+        if (req.method == "GET") {
+            return res.view('game/useraddremark', { game: model })
+        } else {
+
+            var userremarks = req.body.remarks;
+
+            await Item.create(
+                {
+                    message:"桌遊("+model.gamename+")新增備註: "+userremarks,
+                });
+
+
+            var models = await Game.update(req.params.id).set({
+                remarks: userremarks,
+            }).fetch();
+            if (models.length == 0) return res.notFound();
+
+            return res.view('game/usergamereturn', { game: model })
+        }
+    },
+
+    uploadphoto: async function(req, res) {
+        var model=await Game.findOne(req.params.id);
+
+        if (req.method == 'GET')
+            return res.view('game/uploadphoto',{game:model});
+    
+        await Game.update({id: model.id}, {
+            avatar: req.body.Game.avatar
+        });
+        
+        return res.redirect('/game/admingameedit');
     },
   
 

@@ -2,10 +2,12 @@
     <div class="container">
         <br>
 
-        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center">
+        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center2">
 
         <br>
         <br>
+
+        <h4 class="center"><b>物資列表</b></h4>
 
         <div class="table-responsive">
             <table class="table " id="admintable">
@@ -17,10 +19,12 @@
 
                     <th scope="row"></th>
                     <td><a href="/material/adminmaterialdetail/<%=model.id%>"><%=model.materialname%></a></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    
+                    <td>
+                        <form action="/material/uploadphoto/<%=model.id%>" method="GET">
+                            <button type="submit" class="btn btn-primary center">上傳相片</button>
+                        </form>
+                    </td>
                     <td>
                         <a href="/material/adminmaterialupdate/<%=model.id%>" class="btn btn-primary" id="edit">
                             修改
@@ -43,6 +47,11 @@
 
             </table>
         </div>
+
+        <!--<form action="/material/print" method="GET">
+            <button class="center btn btn-secondary" type="submit">
+                打印QR code</button>
+        </form>-->
 
 
 

@@ -8,73 +8,104 @@
 module.exports = {
 
 
-    userindex: async function(req, res) {
-        return res.view('item/userindex');
+    userindex: async function (req, res) {
+        var id = req.session.userid
+        var bookmodel = await User.findOne(id).populate("bookborrow",{sort:'id DESC'});
+        if (!bookmodel) return res.notFound();
+        var bookmodel2 = await User.findOne(id).populate("bookhistory",{sort:'id DESC'});
+        if (!bookmodel) return res.notFound();
+        var bookmodel3 = await User.findOne(id).populate("bookreserve",{sort:'id DESC'});
+        if (!bookmodel) return res.notFound();
+        var gamemodel = await User.findOne(id).populate("gameborrow",{sort:'id DESC'});
+        if (!gamemodel) return res.notFound();
+        var gamemodel2 = await User.findOne(id).populate("gamehistory",{sort:'id DESC'});
+        if (!gamemodel2) return res.notFound();
+        var gamemodel3 = await User.findOne(id).populate("gamereserve",{sort:'id DESC'});
+        if (!gamemodel) return res.notFound();    
+        var materialmodel = await User.findOne(id).populate("materialborrow",{sort:'id DESC'});
+        if (!materialmodel) return res.notFound();
+        var materialmodel2 = await User.findOne(id).populate("materialhistory",{sort:'id DESC'});
+        if (!materialmodel2) return res.notFound();
+        var giftmodel = await User.findOne(id).populate("giftborrow",{sort:'id DESC'});
+        if (!giftmodel) return res.notFound();
+
+        return res.view('item/userindex', {
+            book: bookmodel.bookborrow,
+            game: gamemodel.gameborrow,
+            material: materialmodel.materialborrow,
+            book2:bookmodel2.bookhistory,
+            game2:gamemodel2.gamehistory,
+            material2:materialmodel2.materialhistory,
+            gift:giftmodel.giftborrow,
+            book3:bookmodel3.bookreserve,
+            game3:gamemodel3.gamereserve,
+        });
     },
 
-    adminindex: async function(req, res) {
+    adminindex: async function (req, res) {
+
+
         return res.view('item/adminindex');
     },
 
-    usersearch: async function(req, res) {
+    usersearch: async function (req, res) {
+
+
         return res.view('item/usersearch');
     },
 
-    vistorsearch: async function(req, res) {
+    vistorsearch: async function (req, res) {
+
+
         return res.view('item/vistorsearch');
     },
 
-    vistornotlogin: async function(req, res) {
-        return res.view('item/vistornotlogin');
-    },
+    adminsearch: async function (req, res) {
 
-    adminsearch: async function(req, res) {
+
         return res.view('item/adminsearch');
     },
 
-    usernoti: async function(req, res) {
-        return res.view('item/usernoti');
+    usernoti: async function (req, res) {
+        var models = await Item.find().sort([{ id: 'DESC' }]);
+        return res.view('item/usernoti', { noti: models });
     },
 
-    adminnoti: async function(req, res) {
-        return res.view('item/adminnoti');
-    },
-
-    useraccount: async function(req, res) {
+    useraccount: async function (req, res) {
         var id = req.session.userid
         var user = await User.findOne(id);
         return res.view('item/useraccount', { model: user });
     },
 
+    vistornotlogin: async function (req, res) {
+        return res.view('item/vistornotlogin');
+    },
 
-    adminaccount: async function(req, res) {
+    adminnoti: async function (req, res) {
+        var models = await Item.find().sort([{ id: 'DESC' }]);
+
+        return res.view('item/adminnoti',{ noti: models });
+    },
+
+    adminaccount: async function (req, res) {
         var id = req.session.userid
         var user = await User.findOne(id);
         return res.view('item/adminaccount', { model: user });
     },
 
-    adminadditem: async function(req, res) {
+    adminadditem: async function (req, res) {
+
+
         return res.view('item/adminadditem');
     },
 
-    adminedititem: async function(req, res) {
+    adminedititem: async function (req, res) {
+
+
         return res.view('item/adminedititem');
     },
 
-
-    //
-    //
-    //have not finished testing : below
-    adminUpload: async function(req, res) {
-
-        await Book.update({ username: req.session.username }, {
-            avatar: req.body.Book.avatarPath
-        });
-
-        return res.ok('File uploaded.');
-    },
-
-    adminaddbook: async function(req, res) {
+    adminaddbook: async function (req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddbook');
@@ -82,12 +113,14 @@ module.exports = {
         if (!req.body.Book)
             return res.badRequest("Form-data not received.");
 
+
+
         await Book.create(req.body.Book);
 
-        return res.view('item/adminaddbook')
+        return res.view('item/adminaddbook');
     },
 
-    adminaddgame: async function(req, res) {
+    adminaddgame: async function (req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddgame');
@@ -95,12 +128,14 @@ module.exports = {
         if (!req.body.Game)
             return res.badRequest("Form-data not received.");
 
+
+
         await Game.create(req.body.Game);
 
         return res.view('item/adminaddgame')
     },
 
-    adminaddgift: async function(req, res) {
+    adminaddgift: async function (req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddgift');
@@ -113,7 +148,7 @@ module.exports = {
         return res.view('item/adminaddgift')
     },
 
-    adminaddmaterial: async function(req, res) {
+    adminaddmaterial: async function (req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddmaterial');
@@ -126,7 +161,20 @@ module.exports = {
         return res.view('item/adminaddmaterial')
     },
 
-    adminaddaccount: async function(req, res) {
+    adminaddnoti: async function (req, res) {
+
+        if (req.method == "GET")
+            return res.view('item/adminaddnoti');
+
+        if (!req.body.Item)
+            return res.badRequest("Form-data not received.");
+
+        await Item.create(req.body.Item);
+
+        return res.view('item/adminaddnoti')
+    },
+
+    adminaddaccount: async function (req, res) {
 
         if (req.method == "GET")
             return res.view('item/adminaddaccount');
@@ -138,24 +186,26 @@ module.exports = {
 
         const hash = await sails.bcrypt.hash(password, salt);
 
-        await User.create({
-            username: req.body.username,
-            password: hash,
-            department: req.body.department,
-            position: req.body.position,
-            email: req.body.email,
-        });
+        await User.create(
+            {
+                username: req.body.username,
+                password: hash,
+                department: req.body.department,
+                position: req.body.position,
+                email: req.body.email,
+                role:req.body.role
+            });
 
         return res.view('item/adminaddaccount')
     },
 
-    adminuseredit: async function(req, res) {
+    adminuseredit: async function (req, res) {
         var models = await User.find({ role: "user" }).sort([{ id: 'DESC' }]);
         return res.view('item/adminuseredit', { user: models });
     },
 
     // action - delete 
-    adminuserdelete: async function(req, res) {
+    adminuserdelete: async function (req, res) {
 
         if (req.method == "GET") return res.forbidden();
 
@@ -167,7 +217,7 @@ module.exports = {
 
     },
 
-    adminuserdetail: async function(req, res) {
+    adminuserdetail: async function (req, res) {
 
         var model = await User.findOne(req.params.id);
 
@@ -178,7 +228,7 @@ module.exports = {
     },
 
 
-    adminuserupdate: async function(req, res) {
+    adminuserupdate: async function (req, res) {
 
         if (req.method == "GET") {
 
@@ -211,8 +261,42 @@ module.exports = {
         }
     },
 
+    adminuserpwupdate: async function (req, res) {
 
-    adminaccountupdate: async function(req, res) {
+        if (req.method == "GET") {
+
+            var model = await User.findOne(req.params.id);
+
+            if (!model) return res.notFound();
+
+            return res.view('item/adminuserpwupdate', { user: model });
+
+        } else {
+
+
+            const salt = await sails.bcrypt.genSalt(10);
+
+            const password = await req.body.password;
+
+            const hash = await sails.bcrypt.hash(password, salt);
+
+            var models = await User.update(req.params.id).set({
+                password: hash,
+
+            }).fetch();
+            if (models.length == 0) return res.notFound();
+
+            return res.redirect("/item/adminuseredit");
+
+        }
+    },
+
+
+
+
+
+
+    adminaccountupdate: async function (req, res) {
 
         if (req.method == "GET") {
 
@@ -239,7 +323,7 @@ module.exports = {
         }
     },
 
-    adminpasswordupdate: async function(req, res) {
+    adminpasswordupdate: async function (req, res) {
 
         if (req.method == "GET") {
 
@@ -269,7 +353,7 @@ module.exports = {
     },
 
 
-    useraccountupdate: async function(req, res) {
+    useraccountupdate: async function (req, res) {
 
         if (req.method == "GET") {
 
@@ -294,7 +378,7 @@ module.exports = {
         }
     },
 
-    userpasswordupdate: async function(req, res) {
+    userpasswordupdate: async function (req, res) {
 
         if (req.method == "GET") {
 
@@ -323,17 +407,27 @@ module.exports = {
         }
     },
 
-    noaccount: async function(req, res) {
+    noaccount: async function (req, res) {
 
 
         return res.view('item/noaccount');
     },
 
-    wrongpassword: async function(req, res) {
+    wrongpassword: async function (req, res) {
 
 
         return res.view('item/wrongpassword');
     },
+
+    cannotrenew: async function (req, res) {
+
+
+        return res.view('item/cannotrenew');
+    },
+
+
+
+
 
 
 
@@ -341,3 +435,4 @@ module.exports = {
 
 
 };
+

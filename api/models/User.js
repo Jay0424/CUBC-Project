@@ -46,6 +46,51 @@ module.exports = {
     role:{
       type:"string",
       defaultsTo:"user",
+    },
+
+    bookborrow:{
+      collection:"Book",
+      via:"bookborrowBy"
+    },
+
+    gameborrow:{
+      collection:"Game",
+      via:"gameborrowBy"
+    },
+
+    materialborrow:{
+      collection:"Material",
+      via:"materialborrowBy"
+    },
+
+    bookhistory:{
+      collection:"Book",
+      via:"bookhistoryBy"
+    },
+
+    gamehistory:{
+      collection:"Game",
+      via:"gamehistoryBy"
+    },
+
+    materialhistory:{
+      collection:"Material",
+      via:"materialhistoryBy"
+    },
+
+    giftborrow:{
+      collection:"Gift",
+      via:"giftborrowBy"
+    },
+
+    bookreserve:{
+      collection:"Book",
+      via:"bookreserveBy"
+    },
+
+    gamereserve:{
+      collection:"Game",
+      via:"gamereserveBy"
     }
 
     

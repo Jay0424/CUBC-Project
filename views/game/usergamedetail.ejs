@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="card col-xl-6">
-                <img class="responsive" src=<%=game.photo %> >
+                <img class="responsive" src=<%=game.avatar %> >
             </div>
             <div class="card col-xl-6">
                 <table class="table">
@@ -33,6 +33,26 @@
                             <%=game.publisher %>
                         </th>
                     </tr>
+                    <tr>
+                        <th id="detail" scope="row">狀態:
+                            <%=game.status %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th id="detail" scope="row">借用者及日期(最新):
+                            <%=game.borrowinfo %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th id="detail" scope="row">歸還者及日期(最新):
+                            <%=game.returninfo %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th id="detail" scope="row">備註:
+                            <%=game.remarks %>
+                        </th>
+                    </tr>
                 </table>
 
             </div>
@@ -43,17 +63,17 @@
     <div class="container">
         <div class="row">
             <div class=" col-6 col-sm-6">
-                <a href="#">
+                <form action="/game/borrow" method="GET">
                     <button type="submit" class="borrowbutton">借取</button>
-                </a>
+                </form>
             </div>
 
             <div class=" col-6 col-sm-6">
-                <a href="#">
+                <form action="/user/addreservegame/<%=game.id%>" method="POST">
                     <button type="submit" class="bookbutton">
-                        預訂
+                        預定
                     </button>
-                </a>
+                <form>
             </div>
         </div>
     </div>

@@ -2,13 +2,14 @@
     <div class="container">
         <br>
 
-        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center">
+        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center2">
 
         <br>
         <br>
 
-        <div class="table-responsive">
-            <table class="table " id="admintable">
+
+        <table class="table" id="admintable">
+            <tbody>
 
                 <% user.forEach( function(model) { %>
 
@@ -17,19 +18,20 @@
 
                     <th scope="row"></th>
                     <td><a href="/item/adminuserdetail/<%=model.id%>"><%=model.username%></a></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
                     <td>
                         <a href="/item/adminuserupdate/<%=model.id%>" class="btn btn-primary" id="edit">
-                            修改
+                            修改資料
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/item/adminuserpwupdate/<%=model.id%>" class="btn btn-primary" id="edit">
+                            修改密碼
                         </a>
                     </td>
                     <td>
                         <span id="deleteid"><%= model.id %></span>
 
-                        <form action="/item/adminuserdelete/<%=model.id%>"  method="POST">
+                        <form action="/item/adminuserdelete/<%=model.id%>" method="POST">
                             <button type="submit" class="btn btn-danger">
                                 刪除</button>
                         </form>
@@ -37,12 +39,12 @@
                     </td>
 
                 </tr>
-
-
                 <% }); %>
+            </tbody>
+        </table>
+    
 
-            </table>
-        </div>
+
 
 
 
@@ -72,7 +74,7 @@
                 <span class="nav__text">帳戶</span>
             </a>
         </nav>
-    </div>
+
 
     </div>
 </body>

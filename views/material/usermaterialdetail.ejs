@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="card col-xl-6">
-                <img class="responsive" src=<%=material.photo %>>
+                <img class="responsive" src=<%=material.avatar %>>
             </div>
             <div class="card col-xl-6">
                 <table class="table">
@@ -14,7 +14,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th id="detail" scope="row">書名:
+                        <th id="detail" scope="row">名稱:
                             <%= material.materialname %>
                         </th>
                     </tr>
@@ -24,10 +24,16 @@
                         </th>
                     </tr>
                     <tr>
-                        <th id="detail" scope="row">數量:
+                        <th id="detail" scope="row">現有數量:
                             <%= material.amount %>
                         </th>
                     </tr>
+                    <tr>
+                        <th id="detail" scope="row">備註:
+                            <%=material.remarks %>
+                        </th>
+                    </tr>
+                    
 
                 </table>
 
@@ -39,15 +45,15 @@
     <div class="container">
         <div class="row">
             <div class=" col-6 col-sm-6">
-                <a href="#">
+                <form action="/material/borrow/<%=material.id%>" method="GET">
                     <button type="submit" class="borrowbutton">借取</button>
-                </a>
+                </form>
             </div>
 
             <div class=" col-6 col-sm-6">
                 <a href="#">
                     <button type="submit" class="bookbutton">
-                        預訂
+                        預定
                     </button>
                 </a>
             </div>

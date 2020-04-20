@@ -8,7 +8,7 @@
 module.exports = {
 
     usermaterialsearch: async function (req, res) {
-        var models = await Material.find().sort([{ id: 'DESC' }]);
+        var models = await Material.find({ where: { status: "avaliable" } }).sort([{ id: 'DESC' }]);
         return res.view('material/usermaterialsearch', { material: models });
     },
 
@@ -50,6 +50,26 @@ module.exports = {
         if (!model) return res.notFound();
 
         return res.view('material/usermaterialdetail', { material: model });
+
+    },
+
+    usermaterialdetail2: async function (req, res) {
+
+        var model = await Material.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('material/usermaterialdetail2', { material: model });
+
+    },
+
+    usermaterialreturn: async function (req, res) {
+
+        var model = await Material.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('material/usermaterialreturn', { material: model });
 
     },
 
@@ -145,6 +165,80 @@ module.exports = {
 
         return res.redirect("/material/adminmaterialedit");
 
+    },
+
+    import_xlsx: async function(req, res) {
+
+        if (req.method == 'GET')
+            return res.view('material/import_xlsx');
+    
+        req.file('file').upload({maxBytes: 10000000}, async function whenDone(err, uploadedFiles) {
+            if (err) { return res.serverError(err); }
+            if (uploadedFiles.length === 0){ return res.badRequest('No file was uploaded'); }
+    
+            var XLSX = require('xlsx');
+            var workbook = XLSX.readFile(uploadedFiles[0].fd);
+            var ws = workbook.Sheets[workbook.SheetNames[0]];
+            var data = XLSX.utils.sheet_to_json(ws);
+            console.log(data);
+            var models = await Material.createEach(data).fetch();
+            if (models.length == 0) {
+                return res.badRequest("No data imported.");
+            }
+            return res.redirect("/material/adminmaterialedit");
+        });
+    },
+
+    borrow: async function(req, res) {
+        var model=await Material.findOne(req.params.id);
+        return res.view('material/borrow',{material:model});
+    },
+
+    return: async function(req, res) {
+        var model=await Material.findOne(req.params.id);
+        return res.view('material/return',{material:model});
+    },
+
+    print: async function (req, res) {
+        var models = await Material.find().sort([{ id: 'DESC' }]);
+        return res.view('material/print', { material: models });
+        
+    },
+
+    useraddremark: async function (req, res) {
+        var model = await Material.findOne(req.params.id);
+        if (req.method == "GET") {
+            return res.view('material/useraddremark', { material: model })
+        } else {
+
+            var userremarks = req.body.remarks;
+
+            await Item.create(
+                {
+                    message:"物資("+model.materialname+")新增備註: "+userremarks,
+                });
+
+
+            var models = await Material.update(req.params.id).set({
+                remarks: userremarks,
+            }).fetch();
+            if (models.length == 0) return res.notFound();
+
+            return res.view('material/usermaterialreturn', { material: model })
+        }
+    },
+
+    uploadphoto: async function(req, res) {
+        var model=await Material.findOne(req.params.id);
+
+        if (req.method == 'GET')
+            return res.view('material/uploadphoto',{material:model});
+    
+        await Material.update({id: model.id}, {
+            avatar: req.body.Material.avatar
+        });
+        
+        return res.redirect('/material/adminmaterialedit');
     },
 
 

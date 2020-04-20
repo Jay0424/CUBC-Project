@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="card col-xl-6">
-                <img class="responsive" src=<%=gift.photo %>>
+                <img class="responsive" src=<%=gift.avatar %>>
             </div>
             <div class="card col-xl-6">
                 <table class="table">
@@ -24,7 +24,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th id="detail" scope="row">數量:
+                        <th id="detail" scope="row">現有數量:
                             <%= gift.amount%>
                         </th>
                     </tr>
@@ -38,6 +38,11 @@
                             <%=gift.donator%>
                         </th>
                     </tr>
+                    <tr>
+                        <th id="detail" scope="row">備註:
+                            <%=gift.remarks %>
+                        </th>
+                    </tr>
                 </table>
 
             </div>
@@ -48,17 +53,17 @@
     <div class="container">
         <div class="row">
             <div class=" col-6 col-sm-6">
-                <a href="#">
-                    <button type="submit" class="borrowbutton">借取</button>
-                </a>
+                <form action="/gift/borrow/<%=gift.id%>" method="GET">
+                    <button type="submit" class="borrowbutton">領取</button>
+                </form>
             </div>
 
             <div class=" col-6 col-sm-6">
-                <a href="#">
+                <form action="/gift/useraddremark/<%=gift.id%>" method="GET">
                     <button type="submit" class="bookbutton">
-                        預訂
+                        備註
                     </button>
-                </a>
+                </form>
             </div>
         </div>
     </div>

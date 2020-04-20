@@ -6,8 +6,8 @@
         <label>類型:</label>
         <form action="/material/adminmaterialresult" method="GET">
             <div class="form-group">
-                <select name="category" class="form-control" required>
-                    <option value="">選擇物資種類</option>
+                <select name="category" class="form-control" >
+                    <option value=""></option>
                     <option value="文具">文具</option>
                     <option value="電子產品">電子產品</option>
                 </select>
@@ -17,7 +17,7 @@
                 <input type="string" class="form-control" name="materialname">
             </div>
             <div class="form-group">
-                <label>數量:</label>
+                <label>現有數量:</label>
                 <input type="number" class="form-control" name="amount">
             </div>
 
@@ -35,7 +35,7 @@
 
                         <p></p>
                         <div id="info">
-                            <img src=<%=model.photo %> id="photo" width="150" height="150">
+                            <img src=<%=model.avatar %> id="photo" width="150" height="150">
                             <ul class="list-group">
                                 <li class="list-group-item" id="info">
                                     <span id="briefinfo">物資名稱:</span>

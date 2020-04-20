@@ -4,13 +4,13 @@
     <div class="container">
         <div class="row">
             <div class="card col-xl-6">
-                <img class="responsive" src=<%=book.photo %>>
+                <img class="responsive" src=<%=book.avatar %>>
             </div>
             <div class="card col-xl-6">
                 <table class="table">
                     <tr>
-                        <th id="detail" scope="row">位置:
-                            <%= book.location%>
+                        <th id="detail" scope="row">編號:
+                            <%= book.no%>
                         </th>
                     </tr>
                     <tr>
@@ -24,13 +24,8 @@
                         </th>
                     </tr>
                     <tr>
-                        <th id="detail" scope="row">作者:
+                        <th id="detail" scope="row">作者/機構:
                             <%= book.author %>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th id="detail" scope="row">出版社:
-                            <%=book.publisher %>
                         </th>
                     </tr>
                     <tr>
@@ -39,8 +34,28 @@
                         </th>
                     </tr>
                     <tr>
-                        <th id="detail" scope="row">ISBN:
-                            <%=book.ISBN %>
+                        <th id="detail" scope="row">位置:
+                            <%= book.location%>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th id="detail" scope="row">狀態:
+                            <%=book.status %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th id="detail" scope="row">借用者及日期(最新):
+                            <%=book.borrowinfo %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th id="detail" scope="row">歸還者及日期(最新):
+                            <%=book.returninfo %>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th id="detail" scope="row">備註:
+                            <%=book.remarks %>
                         </th>
                     </tr>
 
@@ -55,13 +70,13 @@
     <div class="container">
         <div class="row">
             <div class=" col-6 col-sm-6">
-                <a href="http://localhost:1337/book/adminbookupdate/<%=book.id%>">
+                <a href="/book/adminbookupdate/<%=book.id%>">
                     <button type="submit" class="changebutton">修改</button>
                 </a>
             </div>
 
             <div class=" col-6 col-sm-6">
-                <form action="http://localhost:1337/book/adminbookdelete/<%=book.id%>" method="POST">
+                <form action="/book/adminbookdelete/<%=book.id%>" method="POST">
                     <button type="submit" class="deletebutton">
                         刪除
                     </button>
