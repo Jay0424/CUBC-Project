@@ -19,14 +19,13 @@
             <h5>
                 <%=model.itemtype%>
                     <%= model.id %>
+                        <a>:</a>
+                        <%= model.giftname %>
             </h5>
-            <div>
-                <h5>
-                    <%= model.giftname %>
-                </h5>
-            </div>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<%=model.giftname%>">
         </div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<%=model.giftname%>">
+
+        <br></div>
         <% }); %>
 
             <nav class="bottomnav fixed-bottom">

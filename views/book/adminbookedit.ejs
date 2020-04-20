@@ -10,14 +10,15 @@
             <button class="center btn btn-secondary" type="submit">
                 列印QR code</button>
         </form>
-
-        <h4 class="center"><b>書藉列表</b></h4>
-
+        <!-- 1 -->
+        <br>
+        <h2 style="color:wheat; background-color: darkred;"> &nbsp;&nbsp; 書藉列表</h2>
+        <!--  1.1-->
         <div class="table-responsive">
-            <table class="table " id="admintable">
-
+            <!--2  -->
+            <table class="table " id="admintable" class="row square" style="background-color:rgb(255, 255, 255)">
+                <!-- 2.1 -->
                 <% book.forEach( function(model) { %>
-
 
                     <tr class="tr2">
 
@@ -29,20 +30,26 @@
                         </td>
                         <td>
                             <form action="/book/uploadphoto/<%=model.id%>" method="GET">
-                                <button type="submit" class="btn btn-primary center">上傳相片</button>
+                                <!--  -->
+                                <button type="submit" class="btn btn-Link center">上傳相片</button>
+                                <!--  -->
                             </form>
                         </td>
                         <td>
-                            <a href="/book/adminbookupdate/<%=model.id%>" class="btn btn-primary" id="edit">
+                            <!--  -->
+                            <a href="/book/adminbookupdate/<%=model.id%>" class="btn btn-Link" id="edit">
                             修改
                         </a>
+                            <!--  -->
                         </td>
                         <td>
                             <span id="deleteid"><%= model.id %></span>
 
                             <form action="/book/adminbookdelete/<%=model.id%>" method="POST">
-                                <button type="submit" class="btn btn-danger">
-                                刪除</button>
+                                <!--  -->
+                                <button type="submit" class="btn btn-Link" style="color:tomato;">
+                                    <strong>刪除</strong></button>
+                                <!--  -->
                             </form>
 
                         </td>

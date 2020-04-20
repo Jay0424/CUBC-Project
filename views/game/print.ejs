@@ -19,13 +19,11 @@
             <h5>
                 <%=model.itemtype%>
                     <%= model.id %>
+                        <a>:</a>
+                        <%= model.gamename %>
             </h5>
-            <div>
-                <h5>
-                    <%= model.gamename %>
-                </h5>
-            </div>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<%=model.gamename%>">
+        </div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=<%=model.gamename%>">
         </div>
         <% }); %>
             <nav class="bottomnav fixed-bottom">
