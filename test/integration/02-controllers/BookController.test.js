@@ -17,29 +17,29 @@ describe('BookController', function() {
         });
     });
 
-    describe(`#Vistor[Result] Click search 'Book' without login`, function() {
-        it('should return vistorbookresult page', function(done) {
-            Async.series([
-                function(vr) {
-                    supertest(sails.hooks.http.app)
-                        .post('/book/vistorbooksearch')
-                        .send({ category: '小說' })
-                        .expect(200)
-                        .then(res => {
-                            const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
-                            cookie = cookies.join(';');
-                            vr();
-                        });
-                },
-                function(vr) {
-                    supertest(sails.hooks.http.app)
-                        .post('/book/vistorbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
-                        .set('Cookie', cookie)
-                        .expect(200, vr);
-                }
-            ], done);
-        });
-    });
+    // describe(`#Vistor[Result] Click search 'Book' without login`, function() {
+    //     it('should return vistorbookresult page', function(done) {
+    //         Async.series([
+    //             function(vr) {
+    //                 supertest(sails.hooks.http.app)
+    //                     .post('/book/vistorbooksearch')
+    //                     .send({ category: '小說' })
+    //                     .expect(200)
+    //                     .then(res => {
+    //                         const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
+    //                         cookie = cookies.join(';');
+    //                         vr();
+    //                     });
+    //             },
+    //             function(vr) {
+    //                 supertest(sails.hooks.http.app)
+    //                     .post('/book/vistorbookresult?category=%E5%B0%8F%E8%AA%AA&bookname=&author=&publisher=&ISBN=')
+    //                     .set('Cookie', cookie)
+    //                     .expect(200, vr);
+    //             }
+    //         ], done);
+    //     });
+    // });
 
 
 
