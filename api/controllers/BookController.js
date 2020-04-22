@@ -7,12 +7,12 @@
 
 module.exports = {
 
-    userbooksearch: async function (req, res) {
+    userbooksearch: async function(req, res) {
         var models = await Book.find().sort([{ id: 'DESC' }]);
         return res.view('book/userbooksearch', { book: models });
     },
 
-    userbookresult: async function (req, res) {
+    userbookresult: async function(req, res) {
         const qCatrgory = req.query.category || "";
         const qBookname = req.query.bookname;
         const qAuthor = req.query.author;
@@ -35,7 +35,7 @@ module.exports = {
 
     },
 
-    userbookdetail: async function (req, res) {
+    userbookdetail: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -45,7 +45,7 @@ module.exports = {
 
     },
 
-    userbookdetail2: async function (req, res) {
+    userbookdetail2: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -55,7 +55,7 @@ module.exports = {
 
     },
 
-    userbookreturn: async function (req, res) {
+    userbookreturn: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -65,7 +65,7 @@ module.exports = {
 
     },
 
-    userbookreserve: async function (req, res) {
+    userbookreserve: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -77,12 +77,12 @@ module.exports = {
 
 
 
-    vistorbooksearch: async function (req, res) {
+    vistorbooksearch: async function(req, res) {
         var models = await Book.find().sort([{ id: 'DESC' }])
         return res.view('book/vistorbooksearch', { book: models });
     },
 
-    vistorbookresult: async function (req, res) {
+    vistorbookresult: async function(req, res) {
         const qCatrgory = req.query.category || "";
         const qBookname = req.query.bookname;
         const qAuthor = req.query.author;
@@ -105,7 +105,7 @@ module.exports = {
 
     },
 
-    vistorbookdetail: async function (req, res) {
+    vistorbookdetail: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -115,12 +115,12 @@ module.exports = {
 
     },
 
-    adminbooksearch: async function (req, res) {
+    adminbooksearch: async function(req, res) {
         var models = await Book.find().sort([{ id: 'DESC' }]);
         return res.view('book/adminbooksearch', { book: models });
     },
 
-    adminbookresult: async function (req, res) {
+    adminbookresult: async function(req, res) {
         const qCatrgory = req.query.category || "";
         const qBookname = req.query.bookname;
         const qAuthor = req.query.author;
@@ -143,7 +143,7 @@ module.exports = {
 
     },
 
-    adminbookdetail: async function (req, res) {
+    adminbookdetail: async function(req, res) {
 
         var model = await Book.findOne(req.params.id);
 
@@ -153,14 +153,14 @@ module.exports = {
 
     },
 
-    adminbookedit: async function (req, res) {
+    adminbookedit: async function(req, res) {
         var models = await Book.find().sort([{ id: 'DESC' }]);
 
         return res.view('book/adminbookedit', { book: models });
     },
 
     // action - adminupdate
-    adminbookupdate: async function (req, res) {
+    adminbookupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -190,7 +190,7 @@ module.exports = {
     },
 
     // action - delete 
-    adminbookdelete: async function (req, res) {
+    adminbookdelete: async function(req, res) {
 
         if (req.method == "GET") return res.forbidden();
 
@@ -202,7 +202,7 @@ module.exports = {
 
     },
 
-    import_xlsx: async function (req, res) {
+    import_xlsx: async function(req, res) {
 
         if (req.method == 'GET')
             return res.view('book/import_xlsx');
@@ -224,21 +224,52 @@ module.exports = {
         });
     },
 
-    borrow: async function (req, res) {
+
+    export_xlsx: async function(req, res) {
+
+        var models = await Book.find();
+
+        var XLSX = require('xlsx');
+        var wb = XLSX.utils.book_new();
+
+        var ws = XLSX.utils.json_to_sheet(models.map(model => {
+            return {
+                書名: model.bookname,
+                類別: model.category,
+                作者或機構: model.author,
+                出版年份: model.year,
+                位置: model.location,
+                相片: model.avatar,
+                編號: model.no,
+                備註: model.remarks,
+                // ISBN: model.ISBN,                
+                // QRcode:model.??
+            }
+        }));
+        XLSX.utils.book_append_sheet(wb, ws, "圖書");
+
+        res.set("Content-disposition", "attachment; filename=book.xlsx");
+        return res.end(XLSX.write(wb, { type: "buffer", bookType: "xlsx" }));
+    },
+
+
+
+
+    borrow: async function(req, res) {
         return res.view('book/borrow');
     },
 
-    return: async function (req, res) {
+    return: async function(req, res) {
         return res.view('book/return');
     },
 
-    print: async function (req, res) {
+    print: async function(req, res) {
         var models = await Book.find().sort([{ id: 'DESC' }]);
         return res.view('book/print', { book: models });
 
     },
 
-    useraddremark: async function (req, res) {
+    useraddremark: async function(req, res) {
         var model = await Book.findOne(req.params.id);
         if (req.method == "GET") {
             return res.view('book/useraddremark', { book: model })
@@ -246,10 +277,9 @@ module.exports = {
 
             var userremarks = req.body.remarks;
 
-            await Item.create(
-                {
-                    message: "書籍(" + model.bookname + ")新增備註: " + userremarks,
-                });
+            await Item.create({
+                message: "書籍(" + model.bookname + ")新增備註: " + userremarks,
+            });
 
 
             var models = await Book.update(req.params.id).set({
@@ -261,7 +291,7 @@ module.exports = {
         }
     },
 
-    uploadphoto: async function (req, res) {
+    uploadphoto: async function(req, res) {
         var model = await Book.findOne(req.params.id);
 
         if (req.method == 'GET')
@@ -288,4 +318,3 @@ module.exports = {
 
 
 };
-

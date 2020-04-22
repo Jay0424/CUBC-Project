@@ -7,12 +7,12 @@
 
 module.exports = {
 
-    usergiftsearch: async function (req, res) {
+    usergiftsearch: async function(req, res) {
         var models = await Gift.find().sort([{ id: 'DESC' }]);
         return res.view('gift/usergiftsearch', { gift: models });
     },
 
-    usergiftresult: async function (req, res) {
+    usergiftresult: async function(req, res) {
         const qCatrgory = req.query.category || "";
         const qGiftname = req.query.giftname;
         const qAmount = parseInt(req.query.amount);
@@ -41,8 +41,7 @@ module.exports = {
                 }
 
             }).sort([{ id: 'DESC' }]);
-        }
-        else if (isNaN(qValue)) {
+        } else if (isNaN(qValue)) {
 
             var models = await Gift.find({
                 where: {
@@ -54,8 +53,7 @@ module.exports = {
                 }
 
             }).sort([{ id: 'DESC' }]);
-        }
-        else {
+        } else {
             var models = await Gift.find({
                 where: {
 
@@ -73,7 +71,7 @@ module.exports = {
 
     },
 
-    usergiftdetail: async function (req, res) {
+    usergiftdetail: async function(req, res) {
 
         var model = await Gift.findOne(req.params.id);
 
@@ -83,7 +81,7 @@ module.exports = {
 
     },
 
-    usergiftdetail2: async function (req, res) {
+    usergiftdetail2: async function(req, res) {
 
         var model = await Gift.findOne(req.params.id);
 
@@ -93,12 +91,12 @@ module.exports = {
 
     },
 
-    admingiftsearch: async function (req, res) {
+    admingiftsearch: async function(req, res) {
         var models = await Gift.find().sort([{ id: 'DESC' }]);
         return res.view('gift/admingiftsearch', { gift: models });
     },
 
-    admingiftresult: async function (req, res) {
+    admingiftresult: async function(req, res) {
         const qCatrgory = req.query.category || "";
         const qGiftname = req.query.giftname;
         const qAmount = parseInt(req.query.amount);
@@ -127,8 +125,7 @@ module.exports = {
                 }
 
             }).sort([{ id: 'DESC' }]);
-        }
-        else if (isNaN(qValue)) {
+        } else if (isNaN(qValue)) {
 
             var models = await Gift.find({
                 where: {
@@ -140,8 +137,7 @@ module.exports = {
                 }
 
             }).sort([{ id: 'DESC' }]);
-        }
-        else {
+        } else {
             var models = await Gift.find({
                 where: {
 
@@ -159,7 +155,7 @@ module.exports = {
 
     },
 
-    admingiftdetail: async function (req, res) {
+    admingiftdetail: async function(req, res) {
 
         var model = await Gift.findOne(req.params.id);
 
@@ -169,13 +165,13 @@ module.exports = {
 
     },
 
-    admingiftedit: async function (req, res) {
-        var models = await Gift.find().sort([{id:'DESC'}]);
-        return res.view('gift/admingiftedit', { gift: models});
+    admingiftedit: async function(req, res) {
+        var models = await Gift.find().sort([{ id: 'DESC' }]);
+        return res.view('gift/admingiftedit', { gift: models });
     },
 
-     // action - adminupdate
-     admingiftupdate: async function (req, res) {
+    // action - adminupdate
+    admingiftupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -207,7 +203,7 @@ module.exports = {
     },
 
     // action - delete 
-    admingiftdelete: async function (req, res) {
+    admingiftdelete: async function(req, res) {
 
         if (req.method == "GET") return res.forbidden();
 
@@ -223,11 +219,11 @@ module.exports = {
 
         if (req.method == 'GET')
             return res.view('gift/import_xlsx');
-    
-        req.file('file').upload({maxBytes: 10000000}, async function whenDone(err, uploadedFiles) {
+
+        req.file('file').upload({ maxBytes: 10000000 }, async function whenDone(err, uploadedFiles) {
             if (err) { return res.serverError(err); }
-            if (uploadedFiles.length === 0){ return res.badRequest('No file was uploaded'); }
-    
+            if (uploadedFiles.length === 0) { return res.badRequest('No file was uploaded'); }
+
             var XLSX = require('xlsx');
             var workbook = XLSX.readFile(uploadedFiles[0].fd);
             var ws = workbook.Sheets[workbook.SheetNames[0]];
@@ -241,22 +237,49 @@ module.exports = {
         });
     },
 
+
+    export_xlsx: async function(req, res) {
+
+        var models = await Gift.find();
+
+        var XLSX = require('xlsx');
+        var wb = XLSX.utils.book_new();
+
+        var ws = XLSX.utils.json_to_sheet(models.map(model => {
+            return {
+                名稱: model.giftname,
+                類別: model.category,
+                現有數量: model.amount,
+                單價價值HKD: model.value,
+                捐贈者: model.donator,
+                位置: model.location,
+                相片: model.avatar,
+                備註: model.remarks,
+            }
+        }));
+        XLSX.utils.book_append_sheet(wb, ws, "禮物");
+
+        res.set("Content-disposition", "attachment; filename=gift.xlsx");
+        return res.end(XLSX.write(wb, { type: "buffer", bookType: "xlsx" }));
+    },
+
+
     borrow: async function(req, res) {
-        var model=await Gift.findOne(req.params.id)
-        return res.view('gift/borrow',{gift:model});
+        var model = await Gift.findOne(req.params.id)
+        return res.view('gift/borrow', { gift: model });
     },
 
     return: async function(req, res) {
         return res.view('gift/return');
     },
 
-    print: async function (req, res) {
+    print: async function(req, res) {
         var models = await Gift.find().sort([{ id: 'DESC' }]);
         return res.view('gift/print', { gift: models });
-        
+
     },
 
-    useraddremark: async function (req, res) {
+    useraddremark: async function(req, res) {
         var model = await Gift.findOne(req.params.id);
         if (req.method == "GET") {
             return res.view('gift/useraddremark', { gift: model })
@@ -264,10 +287,9 @@ module.exports = {
 
             var userremarks = req.body.remarks;
 
-            await Item.create(
-                {
-                    message:"禮物("+model.giftname+")新增備註: "+userremarks,
-                });
+            await Item.create({
+                message: "禮物(" + model.giftname + ")新增備註: " + userremarks,
+            });
 
 
             var models = await Gift.update(req.params.id).set({
@@ -280,15 +302,15 @@ module.exports = {
     },
 
     uploadphoto: async function(req, res) {
-        var model=await Gift.findOne(req.params.id);
+        var model = await Gift.findOne(req.params.id);
 
         if (req.method == 'GET')
-            return res.view('gift/uploadphoto',{gift:model});
-    
-        await Gift.update({id: model.id}, {
+            return res.view('gift/uploadphoto', { gift: model });
+
+        await Gift.update({ id: model.id }, {
             avatar: req.body.Gift.avatar
         });
-        
+
         return res.redirect('/gift/admingiftedit');
     },
 
@@ -296,4 +318,3 @@ module.exports = {
 
 
 };
-

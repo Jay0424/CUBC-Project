@@ -11,6 +11,13 @@
                 列印QR code</button>
         </form>
         <br>
+
+
+        <form action="/book/export_xlsx" method="GET">
+            <button class="btn btn-dark center">下載Excel</button>
+        </form>
+        <br>
+
         <h2 style="color:wheat; background-color: darkred;"> &nbsp;&nbsp; 書藉列表</h2>
 
         <div class="table-responsive">
@@ -41,7 +48,6 @@
                                 <button type="submit" class="btn btn-Link" style="color:tomato;">
                                     <strong>刪除</strong></button>
                             </form>
-
                         </td>
                     </tr>
                     <% }); %>

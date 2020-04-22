@@ -7,12 +7,12 @@
 
 module.exports = {
 
-    usermaterialsearch: async function (req, res) {
+    usermaterialsearch: async function(req, res) {
         var models = await Material.find({ where: { status: "avaliable" } }).sort([{ id: 'DESC' }]);
         return res.view('material/usermaterialsearch', { material: models });
     },
 
-    usermaterialresult: async function (req, res) {
+    usermaterialresult: async function(req, res) {
         const qCategory = req.query.category || "";
         const qMaterialname = req.query.materialname;
         const qAmount = parseInt(req.query.amount);
@@ -43,7 +43,7 @@ module.exports = {
 
     },
 
-    usermaterialdetail: async function (req, res) {
+    usermaterialdetail: async function(req, res) {
 
         var model = await Material.findOne(req.params.id);
 
@@ -53,7 +53,7 @@ module.exports = {
 
     },
 
-    usermaterialdetail2: async function (req, res) {
+    usermaterialdetail2: async function(req, res) {
 
         var model = await Material.findOne(req.params.id);
 
@@ -63,7 +63,7 @@ module.exports = {
 
     },
 
-    usermaterialreturn: async function (req, res) {
+    usermaterialreturn: async function(req, res) {
 
         var model = await Material.findOne(req.params.id);
 
@@ -73,12 +73,12 @@ module.exports = {
 
     },
 
-    adminmaterialsearch: async function (req, res) {
+    adminmaterialsearch: async function(req, res) {
         var models = await Material.find().sort([{ id: 'DESC' }]);
         return res.view('material/adminmaterialsearch', { material: models });
     },
 
-    adminmaterialresult: async function (req, res) {
+    adminmaterialresult: async function(req, res) {
         const qCategory = req.query.category || "";
         const qMaterialname = req.query.materialname;
         const qAmount = parseInt(req.query.amount);
@@ -109,7 +109,7 @@ module.exports = {
 
     },
 
-    adminmaterialdetail: async function (req, res) {
+    adminmaterialdetail: async function(req, res) {
 
         var model = await Material.findOne(req.params.id);
 
@@ -119,13 +119,13 @@ module.exports = {
 
     },
 
-    adminmaterialedit: async function (req, res) {
-        var models = await Material.find().sort([{id:'DESC'}]);
-        return res.view('material/adminmaterialedit', { material: models});
+    adminmaterialedit: async function(req, res) {
+        var models = await Material.find().sort([{ id: 'DESC' }]);
+        return res.view('material/adminmaterialedit', { material: models });
     },
 
-     // action - adminupdate
-     adminmaterialupdate: async function (req, res) {
+    // action - adminupdate
+    adminmaterialupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -155,7 +155,7 @@ module.exports = {
     },
 
     // action - delete 
-    adminmaterialdelete: async function (req, res) {
+    adminmaterialdelete: async function(req, res) {
 
         if (req.method == "GET") return res.forbidden();
 
@@ -171,11 +171,11 @@ module.exports = {
 
         if (req.method == 'GET')
             return res.view('material/import_xlsx');
-    
-        req.file('file').upload({maxBytes: 10000000}, async function whenDone(err, uploadedFiles) {
+
+        req.file('file').upload({ maxBytes: 10000000 }, async function whenDone(err, uploadedFiles) {
             if (err) { return res.serverError(err); }
-            if (uploadedFiles.length === 0){ return res.badRequest('No file was uploaded'); }
-    
+            if (uploadedFiles.length === 0) { return res.badRequest('No file was uploaded'); }
+
             var XLSX = require('xlsx');
             var workbook = XLSX.readFile(uploadedFiles[0].fd);
             var ws = workbook.Sheets[workbook.SheetNames[0]];
@@ -189,23 +189,48 @@ module.exports = {
         });
     },
 
+
+    export_xlsx: async function(req, res) {
+
+        var models = await Material.find();
+
+        var XLSX = require('xlsx');
+        var wb = XLSX.utils.book_new();
+
+        var ws = XLSX.utils.json_to_sheet(models.map(model => {
+            return {
+                名稱: model.materialname,
+                類別: model.category,
+                現有數量: model.amount,
+                位置: model.location,
+                相片: model.avatar,
+                備註: model.remarks,
+            }
+        }));
+        XLSX.utils.book_append_sheet(wb, ws, "物資");
+
+        res.set("Content-disposition", "attachment; filename=material.xlsx");
+        return res.end(XLSX.write(wb, { type: "buffer", bookType: "xlsx" }));
+    },
+
+
     borrow: async function(req, res) {
-        var model=await Material.findOne(req.params.id);
-        return res.view('material/borrow',{material:model});
+        var model = await Material.findOne(req.params.id);
+        return res.view('material/borrow', { material: model });
     },
 
     return: async function(req, res) {
-        var model=await Material.findOne(req.params.id);
-        return res.view('material/return',{material:model});
+        var model = await Material.findOne(req.params.id);
+        return res.view('material/return', { material: model });
     },
 
-    print: async function (req, res) {
+    print: async function(req, res) {
         var models = await Material.find().sort([{ id: 'DESC' }]);
         return res.view('material/print', { material: models });
-        
+
     },
 
-    useraddremark: async function (req, res) {
+    useraddremark: async function(req, res) {
         var model = await Material.findOne(req.params.id);
         if (req.method == "GET") {
             return res.view('material/useraddremark', { material: model })
@@ -213,10 +238,9 @@ module.exports = {
 
             var userremarks = req.body.remarks;
 
-            await Item.create(
-                {
-                    message:"物資("+model.materialname+")新增備註: "+userremarks,
-                });
+            await Item.create({
+                message: "物資(" + model.materialname + ")新增備註: " + userremarks,
+            });
 
 
             var models = await Material.update(req.params.id).set({
@@ -229,18 +253,17 @@ module.exports = {
     },
 
     uploadphoto: async function(req, res) {
-        var model=await Material.findOne(req.params.id);
+        var model = await Material.findOne(req.params.id);
 
         if (req.method == 'GET')
-            return res.view('material/uploadphoto',{material:model});
-    
-        await Material.update({id: model.id}, {
+            return res.view('material/uploadphoto', { material: model });
+
+        await Material.update({ id: model.id }, {
             avatar: req.body.Material.avatar
         });
-        
+
         return res.redirect('/material/adminmaterialedit');
     },
 
 
 };
-

@@ -7,33 +7,33 @@
 
 module.exports = {
 
-    usergamesearch: async function (req, res) {
+    usergamesearch: async function(req, res) {
         var models = await Game.find().sort([{ id: 'DESC' }]);
-        return res.view('game/usergamesearch', { game: models});
+        return res.view('game/usergamesearch', { game: models });
     },
 
-    usergameresult: async function(req, res){
-        const qCatrgory=req.query.category || "";
+    usergameresult: async function(req, res) {
+        const qCatrgory = req.query.category || "";
         const qGamename = req.query.gamename;
         const qPublisher = req.query.publisher;
         const qSerialno = req.query.serialno;
 
         var models = await Game.find({
-            where:{
-            
-            category:{contains:qCatrgory},
-            gamename:{contains:qGamename},
-            publisher:{contains:qPublisher},
-            serialno:{contains:qSerialno},
-            }
-            
-        }).sort([{id:'DESC'}]);
+            where: {
 
-        return res.view('game/usergameresult', {game:models});
+                category: { contains: qCatrgory },
+                gamename: { contains: qGamename },
+                publisher: { contains: qPublisher },
+                serialno: { contains: qSerialno },
+            }
+
+        }).sort([{ id: 'DESC' }]);
+
+        return res.view('game/usergameresult', { game: models });
 
     },
 
-    usergamedetail: async function (req, res) {
+    usergamedetail: async function(req, res) {
 
         var model = await Game.findOne(req.params.id);
 
@@ -43,7 +43,7 @@ module.exports = {
 
     },
 
-    usergamedetail2: async function (req, res) {
+    usergamedetail2: async function(req, res) {
 
         var model = await Game.findOne(req.params.id);
 
@@ -53,7 +53,7 @@ module.exports = {
 
     },
 
-    usergamereturn: async function (req, res) {
+    usergamereturn: async function(req, res) {
 
         var model = await Game.findOne(req.params.id);
 
@@ -63,7 +63,7 @@ module.exports = {
 
     },
 
-    usergamereserve: async function (req, res) {
+    usergamereserve: async function(req, res) {
 
         var model = await Game.findOne(req.params.id);
 
@@ -73,33 +73,33 @@ module.exports = {
 
     },
 
-    admingamesearch: async function (req, res) {
-        var models = await Game.find().sort([{id:'DESC'}]);
-        return res.view('game/admingamesearch', { game: models});
+    admingamesearch: async function(req, res) {
+        var models = await Game.find().sort([{ id: 'DESC' }]);
+        return res.view('game/admingamesearch', { game: models });
     },
 
-    admingameresult: async function(req, res){
-        const qCatrgory=req.query.category || "";
+    admingameresult: async function(req, res) {
+        const qCatrgory = req.query.category || "";
         const qGamename = req.query.gamename;
         const qPublisher = req.query.publisher;
         const qSerialno = req.query.serialno;
 
         var models = await Game.find({
-            where:{
-            
-            category:{contains:qCatrgory},
-            gamename:{contains:qGamename},
-            publisher:{contains:qPublisher},
-            serialno:{contains:qSerialno},
-            }
-            
-        }).sort([{id:'DESC'}]);
+            where: {
 
-        return res.view('game/admingameresult', {game:models});
+                category: { contains: qCatrgory },
+                gamename: { contains: qGamename },
+                publisher: { contains: qPublisher },
+                serialno: { contains: qSerialno },
+            }
+
+        }).sort([{ id: 'DESC' }]);
+
+        return res.view('game/admingameresult', { game: models });
 
     },
 
-    admingamedetail: async function (req, res) {
+    admingamedetail: async function(req, res) {
 
         var model = await Game.findOne(req.params.id);
 
@@ -109,33 +109,33 @@ module.exports = {
 
     },
 
-    vistorgamesearch: async function (req, res) {
-        var models = await Game.find().sort([{id:'DESC'}]);
-        return res.view('game/vistorgamesearch', { game: models});
+    vistorgamesearch: async function(req, res) {
+        var models = await Game.find().sort([{ id: 'DESC' }]);
+        return res.view('game/vistorgamesearch', { game: models });
     },
 
-    vistorgameresult: async function(req, res){
-        const qCatrgory=req.query.category || "";
+    vistorgameresult: async function(req, res) {
+        const qCatrgory = req.query.category || "";
         const qGamename = req.query.gamename;
         const qPublisher = req.query.publisher;
         const qSerialno = req.query.serialno;
 
         var models = await Game.find({
-            where:{
-            
-            category:{contains:qCatrgory},
-            gamename:{contains:qGamename},
-            publisher:{contains:qPublisher},
-            serialno:{contains:qSerialno},
-            }
-            
-        }).sort([{id:'DESC'}]);
+            where: {
 
-        return res.view('game/vistorgameresult', {game:models});
+                category: { contains: qCatrgory },
+                gamename: { contains: qGamename },
+                publisher: { contains: qPublisher },
+                serialno: { contains: qSerialno },
+            }
+
+        }).sort([{ id: 'DESC' }]);
+
+        return res.view('game/vistorgameresult', { game: models });
 
     },
 
-    vistorgamedetail: async function (req, res) {
+    vistorgamedetail: async function(req, res) {
 
         var model = await Game.findOne(req.params.id);
 
@@ -145,13 +145,13 @@ module.exports = {
 
     },
 
-    admingameedit: async function (req, res) {
-        var models = await Game.find().sort([{id:'DESC'}]);
-        return res.view('game/admingameedit', { game: models});
+    admingameedit: async function(req, res) {
+        var models = await Game.find().sort([{ id: 'DESC' }]);
+        return res.view('game/admingameedit', { game: models });
     },
 
-     // action - adminupdate
-     admingameupdate: async function (req, res) {
+    // action - adminupdate
+    admingameupdate: async function(req, res) {
 
         if (req.method == "GET") {
 
@@ -182,7 +182,7 @@ module.exports = {
     },
 
     // action - delete 
-    admingamedelete: async function (req, res) {
+    admingamedelete: async function(req, res) {
 
         if (req.method == "GET") return res.forbidden();
 
@@ -198,11 +198,11 @@ module.exports = {
 
         if (req.method == 'GET')
             return res.view('game/import_xlsx');
-    
-        req.file('file').upload({maxBytes: 10000000}, async function whenDone(err, uploadedFiles) {
+
+        req.file('file').upload({ maxBytes: 10000000 }, async function whenDone(err, uploadedFiles) {
             if (err) { return res.serverError(err); }
-            if (uploadedFiles.length === 0){ return res.badRequest('No file was uploaded'); }
-    
+            if (uploadedFiles.length === 0) { return res.badRequest('No file was uploaded'); }
+
             var XLSX = require('xlsx');
             var workbook = XLSX.readFile(uploadedFiles[0].fd);
             var ws = workbook.Sheets[workbook.SheetNames[0]];
@@ -216,6 +216,33 @@ module.exports = {
         });
     },
 
+
+    export_xlsx: async function(req, res) {
+
+        var models = await Game.find();
+
+        var XLSX = require('xlsx');
+        var wb = XLSX.utils.book_new();
+
+        var ws = XLSX.utils.json_to_sheet(models.map(model => {
+            return {
+                名稱: model.gamename,
+                類別: model.category,
+                出版社: model.publisher,
+                位置: model.location,
+                相片: model.avatar,
+                編號: model.serialno,
+                備註: model.remarks,
+                // QRcode:model.??
+            }
+        }));
+        XLSX.utils.book_append_sheet(wb, ws, "桌遊");
+
+        res.set("Content-disposition", "attachment; filename=game.xlsx");
+        return res.end(XLSX.write(wb, { type: "buffer", bookType: "xlsx" }));
+    },
+
+
     borrow: async function(req, res) {
         return res.view('game/borrow');
     },
@@ -224,13 +251,13 @@ module.exports = {
         return res.view('game/return');
     },
 
-    print: async function (req, res) {
+    print: async function(req, res) {
         var models = await Game.find().sort([{ id: 'DESC' }]);
         return res.view('game/print', { game: models });
-        
+
     },
 
-    useraddremark: async function (req, res) {
+    useraddremark: async function(req, res) {
         var model = await Game.findOne(req.params.id);
         if (req.method == "GET") {
             return res.view('game/useraddremark', { game: model })
@@ -238,10 +265,9 @@ module.exports = {
 
             var userremarks = req.body.remarks;
 
-            await Item.create(
-                {
-                    message:"桌遊("+model.gamename+")新增備註: "+userremarks,
-                });
+            await Item.create({
+                message: "桌遊(" + model.gamename + ")新增備註: " + userremarks,
+            });
 
 
             var models = await Game.update(req.params.id).set({
@@ -254,18 +280,17 @@ module.exports = {
     },
 
     uploadphoto: async function(req, res) {
-        var model=await Game.findOne(req.params.id);
+        var model = await Game.findOne(req.params.id);
 
         if (req.method == 'GET')
-            return res.view('game/uploadphoto',{game:model});
-    
-        await Game.update({id: model.id}, {
+            return res.view('game/uploadphoto', { game: model });
+
+        await Game.update({ id: model.id }, {
             avatar: req.body.Game.avatar
         });
-        
+
         return res.redirect('/game/admingameedit');
     },
-  
+
 
 };
-
