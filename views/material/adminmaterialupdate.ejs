@@ -1,19 +1,14 @@
 <body onload="pageLoaded()">
     <div class="container">
 
-        <form action="/material/adminmaterialupdate/<%=material.id%>" method="POST">
+        <form action="/material/adminmaterialupdate/<%=material.id%>" method="POST" autocomplete="on">
             <div class="form-group row">
                 <div class="col-xl-6 col-form-label">
                     <label>物資種類:</label>
-                    <input type="text" class="form-control" name="Material[category]" value="<%= material.category %>" list="optionlist" required>
-                    <datalist id="optionlist">
+                    <select name="Material[category]" class="form-control">
                         <option value="文具">文具</option>
                         <option value="電子產品">電子產品</option>
-                    </datalist>
-                    <!--<select name="Material[category]" class="form-control">
-                        <option value="文具">文具</option>
-                        <option value="電子產品">電子產品</option>
-                    </select>-->
+                    </select>
                 </div>
                 <div class="col-xl-6 col-form-label">
                     <label>物資名稱:</label>

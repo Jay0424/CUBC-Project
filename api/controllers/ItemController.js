@@ -10,35 +10,35 @@ module.exports = {
 
     userindex: async function (req, res) {
         var id = req.session.userid
-        var bookmodel = await User.findOne(id).populate("bookborrow", { sort: 'id DESC' });
+        var bookmodel = await User.findOne(id).populate("bookborrow",{sort:'id DESC'});
         if (!bookmodel) return res.notFound();
-        var bookmodel2 = await User.findOne(id).populate("bookhistory", { sort: 'id DESC' });
+        var bookmodel2 = await User.findOne(id).populate("bookhistory",{sort:'id DESC'});
         if (!bookmodel) return res.notFound();
-        var bookmodel3 = await User.findOne(id).populate("bookreserve", { sort: 'id DESC' });
+        var bookmodel3 = await User.findOne(id).populate("bookreserve",{sort:'id DESC'});
         if (!bookmodel) return res.notFound();
-        var gamemodel = await User.findOne(id).populate("gameborrow", { sort: 'id DESC' });
+        var gamemodel = await User.findOne(id).populate("gameborrow",{sort:'id DESC'});
         if (!gamemodel) return res.notFound();
-        var gamemodel2 = await User.findOne(id).populate("gamehistory", { sort: 'id DESC' });
+        var gamemodel2 = await User.findOne(id).populate("gamehistory",{sort:'id DESC'});
         if (!gamemodel2) return res.notFound();
-        var gamemodel3 = await User.findOne(id).populate("gamereserve", { sort: 'id DESC' });
-        if (!gamemodel) return res.notFound();
-        var materialmodel = await User.findOne(id).populate("materialborrow", { sort: 'id DESC' });
+        var gamemodel3 = await User.findOne(id).populate("gamereserve",{sort:'id DESC'});
+        if (!gamemodel) return res.notFound();    
+        var materialmodel = await User.findOne(id).populate("materialborrow",{sort:'id DESC'});
         if (!materialmodel) return res.notFound();
-        var materialmodel2 = await User.findOne(id).populate("materialhistory", { sort: 'id DESC' });
+        var materialmodel2 = await User.findOne(id).populate("materialhistory",{sort:'id DESC'});
         if (!materialmodel2) return res.notFound();
-        var giftmodel = await User.findOne(id).populate("giftborrow", { sort: 'id DESC' });
+        var giftmodel = await User.findOne(id).populate("giftborrow",{sort:'id DESC'});
         if (!giftmodel) return res.notFound();
 
         return res.view('item/userindex', {
             book: bookmodel.bookborrow,
             game: gamemodel.gameborrow,
             material: materialmodel.materialborrow,
-            book2: bookmodel2.bookhistory,
-            game2: gamemodel2.gamehistory,
-            material2: materialmodel2.materialhistory,
-            gift: giftmodel.giftborrow,
-            book3: bookmodel3.bookreserve,
-            game3: gamemodel3.gamereserve,
+            book2:bookmodel2.bookhistory,
+            game2:gamemodel2.gamehistory,
+            material2:materialmodel2.materialhistory,
+            gift:giftmodel.giftborrow,
+            book3:bookmodel3.bookreserve,
+            game3:gamemodel3.gamereserve,
         });
     },
 
@@ -84,7 +84,7 @@ module.exports = {
     adminnoti: async function (req, res) {
         var models = await Item.find().sort([{ id: 'DESC' }]);
 
-        return res.view('item/adminnoti', { noti: models });
+        return res.view('item/adminnoti',{ noti: models });
     },
 
     adminaccount: async function (req, res) {
@@ -113,11 +113,11 @@ module.exports = {
         if (!req.body.Book)
             return res.badRequest("Form-data not received.");
 
+
+
         await Book.create(req.body.Book);
 
-        return res.redirect('/book/adminbookedit');
-
-        // return res.view('item/adminaddbook');
+        return res.view('item/adminaddbook');
     },
 
     adminaddgame: async function (req, res) {
@@ -128,9 +128,11 @@ module.exports = {
         if (!req.body.Game)
             return res.badRequest("Form-data not received.");
 
+
+
         await Game.create(req.body.Game);
 
-        return res.redirect('/game/admingameedit');
+        return res.view('item/adminaddgame')
     },
 
     adminaddgift: async function (req, res) {
@@ -143,7 +145,7 @@ module.exports = {
 
         await Gift.create(req.body.Gift);
 
-        return res.redirect('/gift/admingiftedit');
+        return res.view('item/adminaddgift')
     },
 
     adminaddmaterial: async function (req, res) {
@@ -156,11 +158,10 @@ module.exports = {
 
         await Material.create(req.body.Material);
 
-        return res.redirect('/material/adminmaterialedit');
+        return res.view('item/adminaddmaterial')
     },
 
     adminaddnoti: async function (req, res) {
-
 
         if (req.method == "GET")
             return res.view('item/adminaddnoti');
@@ -170,9 +171,7 @@ module.exports = {
 
         await Item.create(req.body.Item);
 
-        var models = await Item.find().sort([{ id: 'DESC' }]);
-
-        return res.view('item/adminnoti', { noti: models });
+        return res.view('item/adminaddnoti')
     },
 
     adminaddaccount: async function (req, res) {
@@ -180,11 +179,6 @@ module.exports = {
         if (req.method == "GET")
             return res.view('item/adminaddaccount');
 
-        var thatAccount = await User.findOne({ username: req.body.username });
-
-        if (thatAccount) {
-            return res.status(409).send("不可使用現有帳戶的用戶名");
-        }
 
         const salt = await sails.bcrypt.genSalt(10);
 
@@ -199,11 +193,10 @@ module.exports = {
                 department: req.body.department,
                 position: req.body.position,
                 email: req.body.email,
-                role: req.body.role
+                role:req.body.role
             });
 
-        var models = await User.find({ role: "user" }).sort([{ id: 'DESC' }]);
-        return res.view('item/adminuseredit', { user: models });
+        return res.view('item/adminaddaccount')
     },
 
     adminuseredit: async function (req, res) {
@@ -220,12 +213,7 @@ module.exports = {
 
         if (models.length == 0) return res.notFound();
 
-        if (req.wantsJSON) {
-            return res.json({ message: "該用戶已被刪除", url: '/item/adminuseredit' });
-        } else {
-
-            return res.redirect("/item/adminuseredit");
-        }
+        return res.redirect("/item/adminuseredit");
 
     },
 
@@ -435,24 +423,6 @@ module.exports = {
 
 
         return res.view('item/cannotrenew');
-    },
-
-    visitoritemnotfound: async function (req, res) {
-
-
-        return res.view('item/visitoritemnotfound')
-    },
-
-    useritemnotfound: async function (req, res) {
-
-
-        return res.view('item/useritemnotfound')
-    },
-
-    adminitemnotfound: async function (req, res) {
-
-
-        return res.view('item/adminitemnotfound')
     },
 
 

@@ -31,10 +31,6 @@ module.exports = {
 
         }).sort([{ id: 'DESC' }]);
 
-        if (models.length == 0) {
-            return res.redirect('/item/useritemnotfound');
-        }
-
         return res.view('book/userbookresult', { book: models });
 
     },
@@ -105,15 +101,9 @@ module.exports = {
 
         }).sort([{ id: 'DESC' }]);
 
-        if (models.length == 0) {
-            return res.redirect('/item/visitoritemnotfound');
-        }
-
         return res.view('book/vistorbookresult', { book: models });
 
     },
-
-
 
     vistorbookdetail: async function (req, res) {
 
@@ -127,7 +117,6 @@ module.exports = {
 
     adminbooksearch: async function (req, res) {
         var models = await Book.find().sort([{ id: 'DESC' }]);
-
         return res.view('book/adminbooksearch', { book: models });
     },
 
@@ -149,10 +138,6 @@ module.exports = {
             }
 
         }).sort([{ id: 'DESC' }]);
-
-        if (models.length == 0) {
-            return res.redirect('/item/adminitemnotfound');
-        }
 
         return res.view('book/adminbookresult', { book: models });
 
@@ -196,7 +181,6 @@ module.exports = {
                 category: req.body.Book.category,
                 location: req.body.Book.location,
                 year: req.body.Book.year,
-                no: req.body.Book.no,
             }).fetch();
             if (models.length == 0) return res.notFound();
 
@@ -214,12 +198,7 @@ module.exports = {
 
         if (models.length == 0) return res.notFound();
 
-        if (req.wantsJSON) {
-            return res.json({ message: "該書本已被刪除", url: '/book/adminbookedit' });
-        } else {
-
-            return res.redirect("/book/adminbookedit");
-        }
+        return res.redirect("/book/adminbookedit");
 
     },
 
@@ -278,7 +257,7 @@ module.exports = {
             }).fetch();
             if (models.length == 0) return res.notFound();
 
-            return res.redirect('/book/userbookreturn/' + model.id)
+            return res.view('book/userbookreturn', { book: model })
         }
     },
 
