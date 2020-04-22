@@ -69,6 +69,11 @@ module.exports = {
             }).sort([{ id: 'DESC' }]);
         }
 
+        if(models.length==0)
+        {
+            return res.redirect('/item/useritemnotfound');
+        }
+
         return res.view('gift/usergiftresult', { gift: models });
 
     },
@@ -155,6 +160,11 @@ module.exports = {
             }).sort([{ id: 'DESC' }]);
         }
 
+        if(models.length==0)
+        {
+            return res.redirect('/item/adminitemnotfound');
+        }
+
         return res.view('gift/admingiftresult', { gift: models });
 
     },
@@ -215,7 +225,14 @@ module.exports = {
 
         if (models.length == 0) return res.notFound();
 
-        return res.redirect("/gift/admingiftedit");
+        if (req.wantsJSON) {
+            return res.json({ message: "該禮物已被刪除", url: '/gift/admingiftedit' });
+        } else {
+
+            return res.redirect("/gift/admingiftedit");;
+        }
+
+        // return res.redirect("/gift/admingiftedit");
 
     },
 
@@ -275,7 +292,7 @@ module.exports = {
             }).fetch();
             if (models.length == 0) return res.notFound();
 
-            return res.view('gift/usergiftdetail', { gift: model })
+            return res.redirect('/gift/usergiftdetail/'+model.id)
         }
     },
 

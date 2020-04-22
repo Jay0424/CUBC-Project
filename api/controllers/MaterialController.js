@@ -38,6 +38,11 @@ module.exports = {
             }).sort([{ id: 'DESC' }]);
         }
 
+        if(models.length==0)
+        {
+            return res.redirect('/item/useritemnotfound');
+        }
+
 
         return res.view('material/usermaterialresult', { material: models });
 
@@ -104,6 +109,11 @@ module.exports = {
             }).sort([{ id: 'DESC' }]);
         }
 
+        if(models.length==0)
+        {
+            return res.redirect('/item/adminitemnotfound');
+        }
+
 
         return res.view('material/adminmaterialresult', { material: models });
 
@@ -163,7 +173,14 @@ module.exports = {
 
         if (models.length == 0) return res.notFound();
 
-        return res.redirect("/material/adminmaterialedit");
+        if (req.wantsJSON) {
+            return res.json({ message: "該物資已被刪除", url: '/material/adminmaterialedit' });
+        } else {
+
+            return res.redirect("/material/adminmaterialedit");;
+        }
+
+        // return res.redirect("/material/adminmaterialedit");
 
     },
 
@@ -223,8 +240,8 @@ module.exports = {
                 remarks: userremarks,
             }).fetch();
             if (models.length == 0) return res.notFound();
-
-            return res.view('material/usermaterialreturn', { material: model })
+            
+            return res.redirect('/material/usermaterialreturn/'+model.id)
         }
     },
 

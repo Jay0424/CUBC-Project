@@ -1,33 +1,28 @@
 <body onload="pageLoaded()">
     <div class="container">
         <br>
+        <br>
+        <br>
 
-        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center2">
+
+        <img src="https://cubc.org.hk/wp-content/uploads/2016/08/logo_retina_x2.png" class="center">
 
         <br>
         <br>
 
 
-        <br>
-        <form action="/book/adminbookedit">
-            <button type="submit" class="btn btn-info center">增加/修改/刪減書本</button>
-        </form>
 
-        <br>
-        <form action="/game/admingameedit">
-            <button type="submit" class="btn btn-info center">增加/修改/刪減桌遊</button>
-        </form>
+        <div>
+            <p class="center">沒有物品符合你輸入的條件 </p>
+            <a class="center" href="/item/adminsearch">按此回到搜尋介面</a>
+        </div>
 
-        
-        <br>
-        <form action="/gift/admingiftedit">
-            <button type="submit" class="btn btn-info center">增加/修改/刪減禮物</button>
-        </form>
 
-        <br>
-        <form action="/material/adminmaterialedit">
-            <button type="submit" class="btn btn-info center">增加/修改/刪減物資</button>
-        </form>
+
+
+
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_jAWhUR.json" background="transparent" speed="1" class="center3" style="width: 350px; height: 350px;" loop autoplay>
+        </lottie-player>
 
         <nav class="bottomnav fixed-bottom">
             <a href="/item/adminindex" class="nav__link">
@@ -59,3 +54,6 @@
 
     </div>
 </body>
+
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>

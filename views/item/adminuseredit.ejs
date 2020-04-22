@@ -7,8 +7,21 @@
         <br>
         <br>
 
+        <a class="btn btn-success" href="/item/adminaddaccount" style="float: left">增加用戶</a>
+        <br>
+        <br>
+        <h2 style="color:wheat; background-color: darkred;"> &nbsp;&nbsp;用戶列表</h2>
 
-        <table class="table" id="admintable">
+        <!-- <form action="/item/adminaddaccount" method="GET">
+            <button class="btn btn-success ">
+                增加用戶
+            </button>
+        </form>
+
+        <h4 class="center"><b>用戶列表</b></h4> -->
+
+
+        <table class="table" id="admintable" class="row square" style="background-color:rgb(255, 255, 255)">
             <tbody>
 
                 <% user.forEach( function(model) { %>
@@ -19,22 +32,22 @@
                     <th scope="row"></th>
                     <td><a href="/item/adminuserdetail/<%=model.id%>"><%=model.username%></a></td>
                     <td>
-                        <a href="/item/adminuserupdate/<%=model.id%>" class="btn btn-primary" id="edit">
+                        <a href="/item/adminuserupdate/<%=model.id%>" class="btn btn-Link" id="edit">
                             修改資料
                         </a>
                     </td>
                     <td>
-                        <a href="/item/adminuserpwupdate/<%=model.id%>" class="btn btn-primary" id="edit">
+                        <a href="/item/adminuserpwupdate/<%=model.id%>" class="btn btn-Link" id="edit">
                             修改密碼
                         </a>
                     </td>
                     <td>
-                        <span id="deleteid"><%= model.id %></span>
 
-                        <form action="/item/adminuserdelete/<%=model.id%>" method="POST">
-                            <button type="submit" class="btn btn-danger">
-                                刪除</button>
-                        </form>
+                        <!-- <form action="/item/adminuserdelete/<%=model.id%>" method="POST"> -->
+                        <button type="submit" class="btn btn-Link" style="color: tomato;"
+                            onclick="deleteUser('<%= model.id %>')">
+                            <Strong> 刪除</Strong></button>
+                        <!-- </form> -->
 
                     </td>
 
@@ -42,7 +55,7 @@
                 <% }); %>
             </tbody>
         </table>
-    
+
 
 
 
@@ -78,3 +91,32 @@
 
     </div>
 </body>
+
+<script>
+
+    async function deleteUser(id) {
+
+        var r = confirm("確認刪除?");
+
+        if (r) {
+
+            var response = await fetch("/item/adminuserdelete/" + id, {
+                method: "POST",
+                credentials: 'same-origin',
+            });
+
+            if (response.ok) {
+                var data = await response.json();
+                alert(data.message);
+                window.location = data.url;
+            } else {
+                alert(response.status + ": " + response.statusText);
+            }
+
+        } else {
+            alert("取消");
+        }
+
+    };
+
+</script>

@@ -158,7 +158,7 @@ module.exports.routes = {
   '   /material/adminmaterialsearch': 'MaterialController.adminmaterialsearch',
   'GET /material/adminmamterialresult': 'MaterialController.adminmaterialresult',
   '   /material/adminmaterialdetail/:id': 'MaterialController.adminmaterialdetail',
-  '   /material/admingameedit': 'MaterialController.admingameedit',
+  '   /material/adminmaterialedit': 'MaterialController.adminmaterialedit',
   'GET /material/adminmaterialupdate/:id': 'MaterialController.adminmaterialupdate',
   'POST /material/adminmaterialupdate/:id': 'MaterialController.adminmaterialupdate',
   'POST /material/adminmaterialdelete/:id': 'MaterialController.adminmaterialdelete',
@@ -208,6 +208,10 @@ module.exports.routes = {
 
   'GET /material/uploadphoto/:id': 'MaterialController.uploadphoto',
   'POST /material/uploadphoto/:id': 'MaterialController.uploadphoto',
+
+  '/item/visitoritemnotfound': 'ItemController.visitoritemnotfound',
+  '/item/useritemnotfound': 'ItemController.useritemnotfound',
+  '/item/adminitemnotfound': 'ItemController.adminitemnotfound',
 
   
 
