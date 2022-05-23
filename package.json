@@ -9,7 +9,7 @@
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
     "bcryptjs": "^2.4.3",
-    "dexie": "^2.0.4",
+    "dexie": "^3.2.2",
     "grunt": "1.0.4",
     "jsqr": "^1.2.0",
     "mailgun-js": "^0.22.0",
